@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>表单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/md5/md5.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/systemuserManage/systemuserManageAddForm.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin:10px;">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名<span class="redRqd">*</span></label>
+                <input type="text" name="realName" class="layui-input" style="width:400px;" lay-verify="required|checkStrlength" wordsLength=128>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号<span class="redRqd">*</span></label>
+                <input type="text" name="phone" class="layui-input" style="width:400px;" lay-verify="required|phone" maxLength=11>
+            </div>
+
+            <div class="layui-form-item" style="position: relative;">
+                <label class="layui-form-label">归属单位<span class="redRqd">*</span></label>
+                <input type="text" name="orgId" id="orgId" class="layui-input formWidth" readonly lay-verify="required">
+                <div id="orgIdBox" class="orgIdBox">
+                    <table id="treetable" class="treetable">
+                        <thead>
+                            <tr>
+                                <td>机构名称</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名<span class="redRqd">*</span></label>
+                <input type="text" name="userName" class="layui-input" autocomplete="new-password" style="width:400px;" lay-verify="required|checkStrlength" wordsLength=32>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码<span class="redRqd">*</span></label>
+
+                <input type="password" name="passWord" placeholder="密码必须为字母加数字加特殊符号且长度不小于8位" lay-verify="required" autocomplete="new-password" class="layui-input" style="width:400px;" lay-verify="checkStrlength" wordsLength=64>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                    <button type="reset" id="czBtn" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

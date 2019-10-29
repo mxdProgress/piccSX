@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/menuManageList.css" media="all" />
+    <style>
+        #orgView table {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 14px !important;
+        }
+        
+        #orgView table thead tr td {
+            border-bottom: 1px solid #888;
+            padding: 12px;
+            line-height: 20px;
+            font-size: 14px;
+            min-height: 20px;
+            background: #f2f2f2
+        }
+        
+        #orgView table tr td {
+            text-align: left;
+            border: 1px solid #e6e6e6;
+            padding: 5px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin: 0 10px;">
+        <div class="search-group ">
+            <div class="date-group" style="margin-top:12px;">
+                <form class="layui-form">
+                    <input type="radio" name="radio" value="1" title="人保机构" id="rbOrg">
+                    <input type="radio" name="radio" value="2" title="全部" id="all">
+                </form>
+
+            </div>
+            <div class="toolBar-right ">
+                <!-- <input type="text" placeholder="组织机构名称" name="search" class="search">-->
+                <!-- <button class="layui-btn  layui-btn-normal layui-btn-sm search-btn">查询</button> -->
+                <button id="addPb" class="layui-btn  layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/organization/organizationListAddForm.html" data-title="新增机构" data-icon="fa fa-window-maximize">新增</button>
+            </div>
+        </div>
+        <div id="orgView"></div>
+        <div style="margin:0px;padding:0px;" id="footBar"></div>
+
+    </div>
+    <script id="orgTpl" type="text/html">
+        <table id="treetable" class="layui-table" lay-skin="line">
+            <thead>
+                <tr>
+                    <th>机构名称</th>
+                    <th>机构简称</th>
+                    <th>机构编码</th>
+                    <th>责任人</th>
+                    <th>责任人电话</th>
+                    <th>备注</th>
+                    <th style="width:120px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{# layui.each(d, function(index, item){ }} {{# if(item.parent == true){ }}
+                <tr data-tt-id="{{ item.orgId }}" data-tt-branch="true" data-tt-parent-id="{{ item.orgId.length > 3 ?item.orgId.substr(0,item.orgId.length-4):'' }}">
+                    {{# } }} {{# if(item.parent ==false){ }}
+                    <tr data-tt-id="{{ item.orgId }}" data-tt-parent-id="{{ item.orgId.length > 3 ?item.orgId.substr(0,item.orgId.length-4):'' }}">
+                        {{# } }}
+                        <td>{{ item.orgName || ''}}</td>
+                        <td>{{ item.simpleName || ''}}</td>
+                        <td>{{ item.comCode || ''}}</td>
+                        <td>{{ item.responsiblePerson || ''}}</td>
+                        <td>{{ item.responsiblePersonPhone || ''}}</td>
+                        <td>{{ item.remark || ''}}</td>
+                        <td>
+                            <button orgid="{{ item.orgId }}" class="layui-btn  layui-btn-sm editBtn" data-iframe-tab="piccSxHtml/systemConfig/organization/organizationListEditForm.html" data-title="编辑机构" data-icon="fa fa-window-maximize">编辑</button>
+                            <button orgid="{{ item.orgId }}" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button>
+                        </td>
+                    </tr>
+                    {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+            </tbody>
+        </table>
+    </script>
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/organization/organizationList.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</body>
+
+</html>

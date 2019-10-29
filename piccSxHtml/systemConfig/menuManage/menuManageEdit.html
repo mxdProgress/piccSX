@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>表单</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/menuManage/menuManageEdit.js"></script>
+
+</head>
+
+<body>
+    <div style="margin: 15px;">
+        <form id="menuManagementListEditForm" class="layui-form">
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:120px;">上级功能菜单</label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <input type="text" name="pearntName" class="layui-input" style="width:300px;" disabled>
+                        <input type="hidden" name="funcId">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">功能菜单名称<span class="redRqd">*</span></label>
+                <input type="text" name="title" class="layui-input" style="width:300px;" lay-verify="required|checkStrlength" wordsLength=100>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">功能菜单编码<span class="redRqd">*</span></label>
+                <input type="text" name="funcCode" class="layui-input" style="width:300px;" lay-verify="required|checkStrlength" wordsLength=100>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">功能菜单链接</label>
+
+                <input type="text" name="href" class="layui-input" style="width:300px;" lay-verify="checkStrlength" wordsLength=200>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">图标</label>
+
+                <input type="text" name="icon" class="layui-input" style="width:300px;" lay-verify="checkStrlength" wordsLength=50>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:120px;">是否展开<span class="redRqd">*</span></label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <select id="spread" name="spread" lay-verify="required">
+                            <option value="false">否</option>
+                            <option value="true" selected>是</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:120px;">是否启用<span class="redRqd">*</span></label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <select id="enableUse" name="enableUse" lay-verify="required">
+                                    <option value="2">否</option>
+                                    <option value="1" selected>是</option>
+                                </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="display:none">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:120px;">是否授权使用<span class="redRqd">*</span></label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <select id="authUse" name="authUse" lay-verify="required">
+                                    <option value="2">否</option>
+                                    <option value="1" selected>是</option>
+                                </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:120px;">功能/菜单<span class="redRqd">*</span></label>
+                    <div class="layui-input-inline" style="width: 300px;">
+                        <select id="isMenu" name="isMenu" lay-verify="required">
+                                    <option value="0" selected>菜单</option>
+                                    <option value="1">功能</option>
+                                </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">排序</label>
+                <input type="text" name="orderNum" class="layui-input" style="width:300px;" lay-verify="checkStrlength" wordsLength=11 value="0">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width:120px;">备注</label>
+                <textarea name="remark" lay-verify="checkStrlength" wordsLength=150 style="width:300px;" class="layui-textarea"></textarea>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                    <button type="reset" id="czBtn" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

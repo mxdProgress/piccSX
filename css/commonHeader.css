@@ -1,0 +1,123 @@
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.search-group {
+    height: 59px;
+    background: #f2f2f2;
+    position: relative;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.search {
+    height: 38px;
+    width: 210px;
+    line-height: 38px;
+    float: left;
+}
+
+.searchGray {
+    width: 200px;
+    margin-right: 10px;
+    float: left;
+    margin-top: 8px;
+}
+
+.filter-list {
+    width: 250px;
+    margin: 8px 0 0 0;
+    float: left;
+}
+
+.filter-list .layui-input-block {
+    margin-left: 0;
+}
+
+.date-group {
+    float: left;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.startTime,
+.endTime {
+    height: 38px;
+    width: 151px;
+    line-height: 38px;
+    padding-left: 10px;
+}
+
+.toolBar-right {
+    float: left;
+    margin-top: 14px;
+    margin-right: 10px;
+}
+
+.layui-box {
+    width: 100%;
+}
+
+.layui-laypage .laypage-extend-pagesize {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 1px;
+    border: none;
+    font-weight: 400;
+}
+
+.layui-laypage .laypage-extend-pagesize {
+    float: right;
+}
+
+.layui-form-checkbox[lay-skin=primary] {
+    margin-top: 0;
+}
+
+.layui-form-checkbox {
+    height: auto;
+    margin: 0;
+}
+
+.organization {
+    margin-top: 10px;
+    float: left;
+}
+
+.caseCountCondition {
+    height: 59px;
+    background: #f2f2f2;
+    position: relative;
+    margin: 14px 10px;
+    border: 1px #e8e6e6 solid;
+    padding: 0 10px;
+}
+
+.dataNull td {
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.dataNull:hover {
+    background: #fff !important;
+}
+
+.redRqd {
+    color: #ff0000;
+}
+
+.clear {
+    clear: both;
+}
+
+.layui-table-body {
+    overflow: hidden;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.layui-body {
+    overflow-y: scroll;
+}

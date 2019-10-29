@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/repairCompany/userCompanyConfig/userComList.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin: 10px;">
+        <div class="search-group">
+            <div class="date-group">
+                <input type="text" class="layui-input " style="width:250px" id="searchValue" autocomplete="off" placeholder="姓名、维修单位名称">
+            </div>
+            <div class="date-group layui-form">
+                <div class="layui-input-inline" style="width: 300px;">
+                    <select id="orgId" name="orgId" lay-verify="required">
+                        <option value="">组织机构</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="toolBar-right">
+                <button class="layui-btn  layui-btn-sm search-btn">搜索</button>
+                <button class="layui-btn  layui-btn-sm clear-btn">清空</button>
+                <button class="layui-btn  layui-btn-sm add-btn">新增关联</button>
+                <button class="layui-btn layui-btn-danger layui-btn-sm deleteBtn">删除关联信息</button>
+                <button class="layui-btn layui-btn-danger layui-btn-sm deleteBtnFoctory">删除关联维修单位</button>
+            </div>
+        </div>
+        <table id="tableId" lay-filter="tableId"></table>
+    </div>
+</body>
+
+</html>

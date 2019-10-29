@@ -1,0 +1,182 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fontIcon/icomoonFonts/icomoon.eot?js5319');
+    src: url('../fontIcon/icomoonFonts/icomoon.eot?js5319#iefix') format('embedded-opentype'), url('../fontIcon/icomoonFonts/icomoon.ttf?js5319') format('truetype'), url('../fontIcon/icomoonFonts/icomoon.woff?js5319') format('woff'), url('../fontIcon/icomoonFonts/icomoon.svg?js5319#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-1:before {
+    content: "\e900";
+}
+
+.icon-2:before {
+    content: "\e901";
+}
+
+.icon-3:before {
+    content: "\e902";
+}
+
+.icon-4:before {
+    content: "\e903";
+}
+
+.icon-5:before {
+    content: "\e904";
+}
+
+.icon-6:before {
+    content: "\e905";
+}
+
+.icon-7:before {
+    content: "\e906";
+}
+
+.icon-a:before {
+    content: "\e907";
+}
+
+.icon-b:before {
+    content: "\e908";
+}
+
+.icon-c:before {
+    content: "\e909";
+}
+
+.icon-d:before {
+    content: "\e90a";
+}
+
+.icon-e:before {
+    content: "\e90b";
+}
+
+.icon-f:before {
+    content: "\e90c";
+}
+
+.icon-g:before {
+    content: "\e90d";
+}
+
+.icon-h:before {
+    content: "\e90e";
+}
+
+.icon-i:before {
+    content: "\e90f";
+}
+
+.icon-j:before {
+    content: "\e910";
+}
+
+.icon-k:before {
+    content: "\e911";
+}
+
+.icon-l:before {
+    content: "\e912";
+}
+
+.icon-m:before {
+    content: "\e913";
+}
+
+.icon-n:before {
+    content: "\e914";
+}
+
+.icon-o:before {
+    content: "\e915";
+}
+
+.icon-anjianfanweipeizhi:before {
+    content: "\e916";
+}
+
+.icon-chakanyuanyichanganjian:before {
+    content: "\e917";
+}
+
+.icon-danweiliuchengpeizhi:before {
+    content: "\e918";
+}
+
+.icon-diaoduguizepeizhi:before {
+    content: "\e919";
+}
+
+.icon-diaoduliuchengpeizhi:before {
+    content: "\e91a";
+}
+
+.icon-diaodurenyuan:before {
+    content: "\e91b";
+}
+
+.icon-liuchengzidianpeizhi:before {
+    content: "\e91c";
+}
+
+.icon-xianshangrenyuanpeizhi:before {
+    content: "\e91d";
+}
+
+.icon-yichanganjianfenxitongji:before {
+    content: "\e91e";
+}
+
+.icon-zidianpeizhi:before {
+    content: "\e91f";
+}
+
+.icon-DDC-info:before {
+    content: "\e920";
+}
+
+.icon-DDC-monitor:before {
+    content: "\e921";
+}
+
+.icon-DDC-setting:before {
+    content: "\e922";
+}
+
+.icon-images:before {
+    content: "\e923";
+}
+
+.icon-uniE924:before {
+    content: "\e924";
+}
+
+.icon-count1:before {
+    content: "\e925";
+}
+
+.icon-count2:before {
+    content: "\e926";
+}
+
+.icon-count3:before {
+    content: "\e927";
+}

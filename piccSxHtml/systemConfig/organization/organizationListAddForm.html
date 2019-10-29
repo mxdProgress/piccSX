@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>新增组织机构</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/organization/organizationListAddForm.js"></script>
+
+    <style>
+        .factoryCode {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin: 15px;">
+        <ul id="demoTree" class="demoTree"></ul>
+        <form class="layui-form">
+
+            <div class="layui-form-item" style="position: relative;">
+                <label class="layui-form-label">上级机构<span class="redRqd">*</span></label>
+                <input type="text" name="orgId" id="orgId" class="layui-input formWidth" readonly lay-verify="required">
+                <div id="orgIdBox" class="orgIdBox">
+                    <table id="treetable" class="treetable">
+                        <thead>
+                            <tr>
+                                <td>机构名称</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构名称<span class="redRqd">*</span></label>
+                <input type="text" name="orgName" class="layui-input formWidth" lay-verify="required|checkStrlength" wordsLength=128>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构类型<span class="redRqd">*</span></label>
+                <div class="layui-input-block formWidth">
+                    <select name="orgType" lay-verify="required" lay-filter="piccOrg">
+                    <option value=""></option>
+                    <option value="1">人保机构</option>
+                    <option value="2">修理厂</option>
+                  </select>
+                </div>
+            </div>
+            <div class="layui-form-item factoryCode">
+                <label class="layui-form-label">维修单位码<span class="redRqd">*</span></label>
+                <input type="text" name="factoryCode" class="layui-input formWidth" lay-verify="checkStrlength" wordsLength=20>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构简称</label>
+                <input type="text" name="simpleName" class="layui-input formWidth" lay-verify="checkStrlength" wordsLength=30>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">机构编码</label>
+                <input type="text" name="comCode" class="layui-input formWidth" lay-verify="checkStrlength" wordsLength=8>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序</label>
+
+                <input type="text" name="order" class="layui-input formWidth" lay-verify="checkNumber" wordsLength=4>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">责任人</label>
+                <input type="text" name="responsiblePerson" class="layui-input formWidth" lay-verify="checkStrlength" wordsLength=32>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">责任人电话</label>
+                <input type="text" name="responsiblePersonPhone" class="layui-input formWidth" lay-verify="checkStrlength" wordsLength=64>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <textarea name="remark" class="layui-textarea formWidth" lay-verify="checkStrlength " wordsLength=128></textarea>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                    <button type="reset" id="czBtn" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

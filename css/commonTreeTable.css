@@ -1,0 +1,48 @@
+.orgIdBox {
+    display: none;
+}
+
+.orgIdBox {
+    position: absolute;
+    top: 37px;
+    left: 110px;
+    z-index: 100;
+    border: 1px #D2D2D2 solid;
+    overflow: auto;
+    width: 400px;
+    max-height: 500px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.orgIdBox table tr {
+    background: #fff;
+}
+
+.orgIdBox table thead td {
+    height: 30px;
+    line-height: 30px;
+    background: #f2f2f2;
+    font-size: 12px;
+    padding-left: 15px;
+}
+
+.orgIdBox table tbody {
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+}
+
+.orgIdBox table tbody tr td {
+    cursor: pointer;
+}
+
+.treetable {
+    width: 100% !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+.formWidth {
+    width: 400px;
+}

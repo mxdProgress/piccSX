@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/systemuserManage/systemuserManageList.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin: 10px;">
+        <div class="search-group">
+            <div class="date-group">
+                <input class="search layui-input" type="text" id="searchValue" placeholder="用户名、姓名" name="search">
+            </div>
+            <div class="toolBar-right">
+                <button class="layui-btn  layui-btn-sm search-btn">搜索</button>
+                <button class="layui-btn  layui-btn-sm clear-btn">清空</button>
+                <button class="layui-btn  layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/systemuserManage/systemuserManageAddForm.html" data-title="新增用户" data-icon="fa fa-window-maximize">新增</button>
+            </div>
+        </div>
+        <table id="orgView" lay-filter="orgView"></table>
+    </div>
+    <script id="barBtn" type="text/html">
+        <button class="layui-btn  layui-btn-sm editBtn" lay-event="editBtn" data-iframe-tab="piccSxHtml/systemConfig/systemuserManage/systemuserManageEditForm.html" data-title="编辑用户" data-icon="fa fa-window-maximize">编辑</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm delBtn" lay-event="deleteBtn">删除</button>
+        <button class="layui-btn layui-btn-danger layui-btn-sm distributionBtn" lay-event="selRoleBtn" data-iframe-tab="piccSxHtml/systemConfig/systemuserManage/systemuserManageDistributionForm.html" data-title="分配角色" data-icon="fa fa-window-maximize">分配角色</button>        {{# if(d.accountStatus==1){ }}
+        <button class="layui-btn layui-btn-danger layui-btn-sm lockBtn" lay-event="lockBtn">锁定</button> {{# } else { }}
+        <button class="layui-btn layui-btn-danger layui-btn-sm onlockBtn" lay-event="onlockBtn">解锁</button> {{# } }}
+    </script>
+</body>
+
+</html>

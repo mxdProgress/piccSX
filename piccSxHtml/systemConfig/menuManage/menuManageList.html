@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/menuManageList.css" media="all" />
+</head>
+
+<body>
+    <div style="margin:0 10px">
+        <div class="search-group">
+            <div class="toolBar-right ">
+                <button class="layui-btn  layui-btn-normal layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/menuManage/menuManageAdd.html" data-title="新增功能菜单" data-icon="fa fa-window-maximize" style="background-color: #1AA194;" customValidation="gongnengcaidanweihuxinzeng">新增</button>
+            </div>
+        </div>
+        <div id="orgView"></div>
+        <div style="margin:0px;padding:0px;" id="footBar"></div>
+    </div>
+
+    <script id="orgTpl" type="text/html">
+        <table id="treetable" class="layui-table" lay-skin="line">
+            <thead>
+                <tr>
+                    <th>功能菜单名称</th>
+                    <th>功能菜单编码</th>
+                    <th>是否启用</th>
+                    <th>功能/菜单</th>
+                    <th>排序</th>
+                    <th>备注</th>
+                    <th style="width:120px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{# layui.each(d, function(index, item){ }}
+                <tr data-tt-id="{{ item.funcId }}" data-tt-parent-id="{{ item.funcId.length > 3 ?item.funcId.substr(0,item.funcId.length-4):'' }}">
+                    <td>{{ item.title || ''}}</td>
+                    <td>{{ item.funcCode || ''}}</td>
+                    <td>{{ item.enableUseDesc || ''}}</td>
+                    <td>{{ item.isMenuDesc || ''}}</td>
+                    <td>{{ item.orderNum.toString() || ''}}</td>
+                    <td>{{ item.remark || ''}}</td>
+                    <td>
+                        <button funcId="{{ item.funcId }}" hrefId="manageEdit" data-iframe-tab="piccSxHtml/systemConfig/menuManage/menuManageEdit.html" data-title="编辑功能菜单" data-icon="fa fa-window-maximize" class="layui-btn layui-btn-sm editBtn">编辑</button>
+                        <button funcId="{{ item.funcId }}" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button>
+                    </td>
+                </tr>
+                {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+            </tbody>
+        </table>
+    </script>
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/systemConfig/menuManage/menuManageList.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+
+</body>
+
+</html>

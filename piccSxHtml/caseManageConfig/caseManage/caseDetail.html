@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/caseManageConfig/caseManage/caseDetail.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+    <style>
+        .form-width {
+            width: 25%;
+            float: left;
+            clear: none;
+        }
+        
+        .caseBox h2 {
+            font-size: 16px;
+            background: #f2f2f2;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 20px;
+            margin: 10px 0;
+            margin-bottom: 30px;
+            color: #1aa094;
+        }
+        
+        .layui-icon-layer:before {
+            color: #1aa094;
+        }
+        
+        .search-group {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin:10px" class="caseBox">
+        <h2><i class="layui-icon layui-icon-layer"></i> 案件信息</h2>
+        <div class="layui-form">
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">案件号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registno" readonly placeholder="案件号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">单位名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="factoryName" readonly placeholder="单位名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">报案人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reportorname" id="" readonly placeholder="报案人" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">报案人电话</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reportorphone" id="" readonly placeholder="报案人电话" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">报案时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reporttime" id="" readonly placeholder="报案时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">报案地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="reportaddress" id="" readonly placeholder="报案地址" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">归属机构码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="registcomcode" id="" readonly placeholder="归属机构码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">品牌名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="brandname" id="" readonly placeholder="品牌名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">送修状态</label>
+                <div class="layui-input-block">
+                    <input type="text" name="repairStatusDesc" id="" readonly placeholder="送修状态" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">是否到店</label>
+                <div class="layui-input-block">
+                    <input type="text" name="arriveStatusDesc" id="" readonly placeholder="是否到店" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">是否评价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="evaluateStatusDesc" id="" readonly placeholder="是否评价" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item form-width">
+                <label class="layui-form-label">是否交车</label>
+                <div class="layui-input-block">
+                    <input type="text" name="deliverStatusDesc" id="" readonly placeholder="是否交车" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="layui-tab layui-tab-brief" style="margin-top:20px;">
+            <ul class="layui-tab-title">
+                <li class="layui-this">维修进度详情</li>
+                <li>送修引导记录详情</li>
+            </ul>
+            <div class="layui-tab-content" style="padding:0">
+                <div class="layui-tab-item layui-show">
+                    <div class="search-group">
+                        <div class="toolBar-right">
+                            <button class="layui-btn layui-btn-sm addProcessDetail">新增维修中进度详情</button>
+                        </div>
+                    </div>
+                    <table id="processDetail" lay-filter="processDetail"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table id="sendRepairProcess" lay-filter="sendRepairProcess"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

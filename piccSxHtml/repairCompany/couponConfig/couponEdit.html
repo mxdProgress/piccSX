@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/repairCompany/couponConfig/couponEdit.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin: 20px 30px 20px 10px;" class="layui-form">
+        <div class=" layui-form-item">
+            <label class="layui-form-label">维修单位<span class="redRqd">*</span></label>
+            <div class="layui-input-block">
+                <select name="factorycode" lay-verify="" id="repairCompany" lay-search>
+                    <option value="">请选择维修单位</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">金额<span class="redRqd">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="amount" required lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称<span class="redRqd">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间<span class="redRqd">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="startTime" id="startTime" required lay-verify="required" placeholder="开始时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">截止时间<span class="redRqd">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" name="endTime" id="endTime" required lay-verify="required" placeholder="截止时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">优惠描述</label>
+            <div class="layui-input-block">
+                <textarea name="detailDesc" placeholder="优惠描述" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">使用门槛</label>
+            <div class="layui-input-block">
+                <textarea name="conditionDesc" placeholder="使用门槛" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
