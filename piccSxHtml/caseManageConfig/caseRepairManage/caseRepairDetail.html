@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/caseRepairDetail.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" href="../../../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/caseManageConfig/caseRepairManage/caseRepairDetail.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js" charset="utf-8"></script>
+    <style>
+        .green {
+            color: #FF5722!important;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin:10px 0px 20px">
+        <div class="detailBox" id="caseInfo">
+            <h3><span></span>案件信息</h3>
+            <div class="tableInfo repairInfo">
+                <table class="layui-table ">
+                    <tbody>
+                        <tr>
+                            <td>报案号</td>
+                            <td id="registno"></td>
+                            <td>报案时间</td>
+                            <td id="reporttime"></td>
+                            <td>查勘员姓名</td>
+                            <td id="surveyorName"></td>
+                            <td>查勘员电话</td>
+                            <td id="surveyorPhone"></td>
+                        </tr>
+                        <tr>
+                            <td>出险地址</td>
+                            <td id="reportaddress"></td>
+                            <td>车牌号</td>
+                            <td id="licenseno"></td>
+                            <td class="green">是否有人伤</td>
+                            <td id="hurtflagDesc" class="green"></td>
+                            <td class="green">资源类型</td>
+                            <td id="resourceflagDesc" class="green"></td>
+                        </tr>
+                        <tr>
+                            <td>是否三者车</td>
+                            <td id="thirdflagDesc"></td>
+                            <td>车型名称</td>
+                            <td id="brandname"></td>
+                            <td>保单归属机构码</td>
+                            <td id="policycomcode"></td>
+                            <td>推荐送修码</td>
+                            <td id="monopolycode"></td>
+                        </tr>
+                        <tr id="carTypeName">
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="detailBox" id="repairInfo">
+            <h3><span></span>送修信息</h3>
+            <div id="repairInfoTable"></div>
+            <!-- <div class="tableInfo repairInfo">
+            <table class="layui-table ">
+                <tbody>
+                    <tr>
+                        <td style="width:120px;" class="green">来源</td>
+                        <td id="facSourceDesc" class="green"></td>
+                        <td>送修意愿</td>
+                        <td id="wishgoflagDesc"></td>
+                        <td>维修单位地址</td>
+                        <td colspan="" id="address"></td>
+                    </tr>
+                    <tr>
+                        <td>维修单位名称</td>
+                        <td colspan="9">
+                            <span style="margin-right: 50px; float: left;" id="factoryName"></span>
+                            <div class="statusBtn">
+                                <button class="layui-btn layui-btn-sm refuseBtn " val="1">同意</button>
+                                <button class="layui-btn layui-btn-sm refuseBtn " val="0">拒绝</button>
+                                <button class="layui-btn layui-btn-sm refuseBtn " val="3">不明确</button>
+                                <button class="layui-btn layui-btn-sm refuseBtn " val="4">不赔付</button>
+                            </div>
+                            <div class="statusBtn1">
+                                <button class="layui-btn layui-btn-sm statusFeedback ydd" val="2">已到店</button>
+                                <button class="layui-btn layui-btn-sm statusFeedback yls" val="3">已流失</button>
+                                <button class="layui-btn layui-btn-sm statusFeedback gzsf" val="4">跟踪随访</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+
+
+        </div>
+
+        <div class="detailBox" id="secondRepair">
+            <h3>
+                <span></span>二次送修
+                <button class="layui-btn layui-btn-sm upHidden operaterbtn" value="0">收起</button>
+                <button value="1" class="layui-btn layui-btn-sm downShow operaterbtn">展开</button>
+            </h3>
+            <div class="repairStyle">
+                <p>选择查询维修单位方式：
+                    <button class="layui-btn layui-btn-sm addressBtn"><i class="fa fa-search" aria-hidden="true"></i>客户指定维修单位</button>
+                    <button class="layui-btn layui-btn-sm orgBtn"><i class="fa fa-search" aria-hidden="true"></i>机构下属维修单位</button>
+                </p>
+                <div class="addressSearch">
+                    <div class="search-group">
+                        <div class="date-group">
+                            <input type="text" class="layui-input factoryAddress" id="factoryAddress" autocomplete="off" placeholder="请输入维修单位名称">
+                        </div>
+                        <div class="toolBar-right">
+                            <button class="layui-btn layui-btn-sm search-btn">查询</button>
+                            <button class="layui-btn layui-btn-sm clear-btn">清空</button>
+                        </div>
+                    </div>
+
+                    <table id="factoryTable" lay-filter="factoryTable"></table>
+                    <script id="barBtn" type="text/html">
+                        <button class="layui-btn layui-btn-sm select" lay-event="select">选择</button>
+                    </script>
+                </div>
+
+                <div class="orgSearch">
+                    <div class="search-group">
+                        <div class="date-group layui-form">
+                            <!-- <div class="layui-inline">
+                            <div class="layui-input-inline" style="width: 300px;">
+                                <select id="orgId" name="orgId" lay-verify="required">
+                                    <option value="">请选择机构</option>
+                                </select>
+                            </div>
+                        </div> -->
+                            <div class="layui-form-item" style="position: relative;">
+                                <input type="text" name="orgId" id="orgId" placeholder="请选择组织机构" class="layui-input formWidth" readonly lay-verify="required">
+                                <div id="orgIdBox" class="orgIdBox" style="left:0">
+                                    <table id="treetable" class="treetable">
+                                        <thead>
+                                            <tr>
+                                                <td>机构名称</td>
+                                                <td>操作</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="date-group">
+                            <input type="text" class="layui-input factoryAddress" id="factoryAddress1" autocomplete="off" placeholder="请输入维修单位名称">
+                        </div>
+                        <div class="toolBar-right">
+                            <button class="layui-btn layui-btn-sm org-search-btn">查询</button>
+                            <button class="layui-btn layui-btn-sm clear-btn1">清空</button>
+                        </div>
+                    </div>
+                    <table id="factoryTable1" lay-filter="factoryTable1"></table>
+                    <script id="barBtn1" type="text/html">
+                        <button class="layui-btn layui-btn-sm select" lay-event="select1">选择</button>
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div class="detailBox" id="enterINfo">
+            <h3><span></span>录入流失信息</h3>
+            <form class="layui-form" style="margin-top:15px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">流失原因<span class="red">*</span></label>
+                    <div class="layui-input-block" style="position: relative;">
+                        <input type="text" name="lossReason" required id="lossReason" lay-verify="required" placeholder="流失原因" autocomplete="off" class="layui-input lossReason">
+                        <div id="lossList" class="lossList">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">流失去向</label>
+                    <div class="layui-input-block">
+                        <select name="factorycode" id="repairCompany" lay-search>
+                      <option value="">流失去向</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">非合作维修单位</label>
+                    <div class="layui-input-block">
+                        <textarea name="otherDesc" placeholder="非合作维修单位录入" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submit">提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="detailBox" id="losssInfoBox">
+            <h3 style="margin-bottom:0;"><span></span>流失信息</h3>
+            <table id="losssInfoTable" lay-filter="losssInfoTable"></table>
+            <script id="losssInfoBtn" type="text/html">
+                <button class="layui-btn layui-btn-sm " lay-event="alter">修改</button>
+                <!-- <button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="deleter">删除</button> -->
+            </script>
+        </div>
+        <div class="detailBox" id="repairRecord">
+            <h3 style="margin-bottom:0;"><span></span>送修操作日志</h3>
+            <table id="repairRecordTable" lay-filter="repairRecordTable"></table>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

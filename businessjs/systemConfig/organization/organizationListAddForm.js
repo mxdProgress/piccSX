@@ -1,9 +1,8 @@
-layui.use(['form', 'layedit', 'laydate', 'layuimini', 'dtree', 'jquery'], function() {
+layui.use(['form', 'layedit', 'laydate', 'layuimini', 'jquery'], function() {
     var form = layui.form,
         layer = layui.layer,
         layedit = layui.layedit,
         laydate = layui.laydate,
-        dtree = layui.dtree,
         $ = layui.jquery;
     var orgId;
     var par = {};
@@ -121,7 +120,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini', 'dtree', 'jquery'], functi
                 return false;
             }
         }
-        data.field.orgId = orgId;
+        data.field.parentOrgId = orgId;
         jqpost(serverconfig.interface.orgSaveOrg, data.field, true, function() {
             parent.layuimini.msg_success('操作成功');
             $("#czBtn").click();
@@ -132,7 +131,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini', 'dtree', 'jquery'], functi
                 //刷新
                 $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                 //关闭
-                layuimini.getTitleDelTab('新增机构');
+                parent.layer.closeAll();
             }, 1000);
         });
         return false;

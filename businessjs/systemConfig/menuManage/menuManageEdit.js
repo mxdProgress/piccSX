@@ -1,16 +1,11 @@
-layui.use(['form', 'layedit', 'laydate', 'element', 'layuimini'], function() {
+layui.use(['form', 'layedit', 'layuimini'], function() {
     var form = layui.form,
         layer = layui.layer,
         layedit = layui.layedit,
-        element = layui.element,
-        laydate = layui.laydate,
         $ = layui.jquery;
-
-    var editFuncId = layui.data('menuManagementListEditForm');
-    var time = layui.data('time')['time'];
-    var orgId = editFuncId['funcId' + time];
-    pa = {
-        "funcId": orgId
+    var urlPar = getParamsFromURL();
+    var pa = {
+        funcId: urlPar.funcId
     };
 
     jqpost(serverconfig.interface.maintenanceSelectMaintenance, pa, true, function(data, status, xhr) {
@@ -28,7 +23,7 @@ layui.use(['form', 'layedit', 'laydate', 'element', 'layuimini'], function() {
             //刷新
             $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
             //关闭
-            layuimini.getTitleDelTab('编辑功能菜单');
+            parent.layer.closeAll();
         });
         return false;
     });

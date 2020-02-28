@@ -13,22 +13,49 @@
 
     <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
     <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
     <script type="text/javascript" src="../../../businessjs/repairCompany/userCompanyConfig/uesrCompanyAddForm.js"></script>
-    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+    <!-- <script type="text/javascript" src="../../../js/login/checkLogin.js"></script> -->
 </head>
 
 <body>
     <div style="margin: 10px;">
         <div class="search-group">
             <div class="date-group layui-form">
-                <div class="layui-input-inline" style="width: 300px;">
-                    <select id="orgId" name="orgId" lay-verify="required">
-                            <option value="">组织机构</option>
+                <div class="layui-form-item" style="position: relative;">
+                    <!-- <label class="layui-form-label" style="width:120px;">组织机构<span class="redRqd">*</span></label> -->
+                    <input type="text" name="orgId" id="orgId" placeholder="组织机构" class="layui-input formWidth" readonly lay-verify="required">
+                    <div id="orgIdBox" class="orgIdBox" style="position: absolute;left: 0;">
+                        <table id="treetable" class="treetable">
+                            <thead>
+                                <tr>
+                                    <td>机构名称</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="date-group layui-form" ;>
+                <div class=" layui-form-item" style="width:120px">
+                    <div class="layui-input-inline" style="margin:0; width:100%">
+                        <select name="" lay-verify="" id="roleType">
+                            <option value="">人员角色</option>
+                            <option value="1">管理员</option>
+                            <option value="2" selected>送修转岗</option>
                         </select>
+                    </div>
                 </div>
             </div>
             <div class="date-group layui-form" ;>
@@ -40,19 +67,6 @@
                     </div>
                 </div>
             </div>
-            <div class="date-group layui-form" ;>
-                <div class=" layui-form-item" style="width:120px">
-                    <div class="layui-input-inline" style="margin:0; width:100%">
-                        <select name="" lay-verify="" id="roleType">
-                            <option value="">人员角色</option>
-                            <option value="1">管理员</option>
-                            <option value="2">协赔员</option>
-                            <option value="3">驻店员</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
             <div class="toolBar-right">
                 <button class="layui-btn  layui-btn-sm search-btn">搜索</button>
                 <button class="layui-btn  layui-btn-sm clear-btn">清空</button>

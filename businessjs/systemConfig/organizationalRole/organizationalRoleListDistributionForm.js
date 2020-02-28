@@ -23,12 +23,13 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
     $ = layui.jquery;
 
 
-    var organizationalRoleListDistributionForm = layui.data('organizationalRoleListDistributionForm');
-    var time = layui.data('time')['time'];
-    var organizationRoleId = organizationalRoleListDistributionForm['organizationRoleId' + time];
-    var pa = { organizationId: organizationRoleId };
+    // var organizationalRoleListDistributionForm = layui.data('organizationalRoleListDistributionForm');
+    // var time = layui.data('time')['time'];
+    // var organizationRoleId = organizationalRoleListDistributionForm['organizationRoleId' + time];
+    // var pa = { organizationId: organizationRoleId };
 
-
+    var urlPar = getParamsFromURL();
+    var pa = { organizationId: urlPar.organizationRoleId };
 
     //自定义验证规则
     form.verify(formvalidator);
@@ -49,7 +50,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                 maintenanceIds.push(checkedNodes[aa].orgId);
             }
         }
-        data.field["organizationRoleId"] = organizationRoleId;
+        data.field["organizationRoleId"] = urlPar.organizationRoleId;
         data.field["userIds"] = maintenanceIds;
         jqpost(serverconfig.interface.roleOrganRoleUserAddUser, data.field, true, function(data) {
             parent.layer.msg('操作成功');
@@ -60,7 +61,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                 //刷新
                 $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                 //关闭
-                layuimini.getTitleDelTab('分配用户');
+                parent.layer.closeAll();
             }, 1000);
         });
 

@@ -6,7 +6,7 @@
     position: absolute;
     top: 37px;
     left: 110px;
-    z-index: 100;
+    z-index: 10000000;
     border: 1px #D2D2D2 solid;
     overflow: auto;
     width: 400px;

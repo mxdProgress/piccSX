@@ -21,16 +21,11 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
         layedit = layui.layedit,
         laydate = layui.laydate;
     $ = layui.jquery;
-
-    var systemuserManageDistributionForm = layui.data('systemuserManageDistributionForm');
-    var time = layui.data('time')['time'];
-    var userId = systemuserManageDistributionForm['userId' + time];
-    var orgId = systemuserManageDistributionForm['orgId' + time];
+    var urlPar = getParamsFromURL();
     var pa = {
-        userId: userId,
-        orgId: orgId
+        userId: urlPar.userId,
+        orgId: urlPar.orgId
     }
-
 
     //自定义验证规则
     form.verify(formvalidator);
@@ -63,7 +58,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                     //刷新
                     $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                     //关闭
-                    layuimini.getTitleDelTab('分配角色');
+                    parent.layer.closeAll();
                 }, 1000);
             }
         });

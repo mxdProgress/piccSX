@@ -19,7 +19,7 @@ layui.use(['form', 'layer', 'layuimini'], function() {
             data: formData,
             contentType: false,
             processData: false,
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             mimeType: "multipart/form-data",
             success: function(data) {
                 if (data) {

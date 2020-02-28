@@ -23,7 +23,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini', 'element'], function() {
             //刷新
             $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
             //关闭
-            layuimini.getTitleDelTab('新增功能菜单');
+            parent.layer.closeAll();
             $("#czBtn").click();
         });
 

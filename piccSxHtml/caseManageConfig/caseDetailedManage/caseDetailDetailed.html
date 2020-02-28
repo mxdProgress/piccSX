@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/caseManageConfig/caseDetailedManage/caseDetailDetailed.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+    <style>
+        html,
+        body {
+            background: #eee;
+            min-height: 100%;
+        }
+        
+        .detailBox {
+            margin: 10px;
+            background: #fff;
+            padding: 0 15px 5px;
+            font-size: 13px;
+            border-radius: 2px;
+        }
+        
+        .detailBox h3 {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            font-size: 14px;
+            margin: 7px 0;
+            position: relative;
+        }
+        
+        .detailBox h3 span {
+            display: inline-block;
+            width: 3px;
+            vertical-align: top;
+            height: 20px;
+            background: rgb(115, 115, 115);
+            margin-right: 7px;
+        }
+        
+        .layui-table {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .tableInfo tr td {
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 9px 7px;
+        }
+        
+        .tableInfo tr td:nth-child(2n+1) {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="detailBox" id="caseInfo">
+        <h3><span></span>清单明细</h3>
+        <div class="tableInfo repairInfo">
+            <table class="layui-table ">
+                <tbody>
+                    <tr>
+                        <td>报案号</td>
+                        <td id="registno"></td>
+                        <td>车牌号</td>
+                        <td id="licenseno"></td>
+                        <td>品牌代码</td>
+                        <td id="brandcode"></td>
+                        <td>是否三者车</td>
+                        <td id="thirdflagDesc"></td>
+                    </tr>
+                    <tr>
+                        <td>报案人姓名</td>
+                        <td id="reportorname"></td>
+                        <td>报案人电话</td>
+                        <td id="reportorphone"></td>
+                        <td>报案时间</td>
+                        <td id="reporttime"></td>
+                        <td>资源类型</td>
+                        <td id="resourceflagDesc"></td>
+                    </tr>
+                    <tr>
+                        <td>品牌名称</td>
+                        <td id="brandname"></td>
+                        <td>到店状态</td>
+                        <td id="arriveStatusDesc"></td>
+                        <td>查勘员工号</td>
+                        <td id="surveyorCode"></td>
+                        <td>查勘员姓名</td>
+                        <td id="surveyorName"></td>
+                    </tr>
+                    <tr>
+                        <td>查勘属地</td>
+                        <td id="registcomcode"></td>
+                        <td>保单归属机构</td>
+                        <td id="policycomcode"></td>
+                        <td>送修专岗工号</td>
+                        <td id="receiverCode"></td>
+                        <td>送修专岗姓名</td>
+                        <td id="receiverName"></td>
+                    </tr>
+                    <tr>
+                        <td>系统送修单位名称</td>
+                        <td id="sysfactoryName"></td>
+                        <td>系统送修单位代码</td>
+                        <td id="sysfactorycode"></td>
+                        <td>系统送修客户意愿</td>
+                        <td id="syswishgoflagDesc"></td>
+                        <td>是否二次送修</td>
+                        <td id="secondflag"></td>
+                    </tr>
+                    <tr>
+                        <td>二次送修单位代码</td>
+                        <td id="secondfaccode"></td>
+                        <td>二次送修单位名称</td>
+                        <td id="secondfacName"></td>
+                        <td>实际送修单位代码</td>
+                        <td id="finalfaccode"></td>
+                        <td>实际送修单位名称</td>
+                        <td id="finalfacName"></td>
+                    </tr>
+                    <tr>
+                        <td>是否流失</td>
+                        <td id="lossDesc"></td>
+                        <td>流失原因</td>
+                        <td id="lossReason"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -14,6 +14,9 @@
 
     <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
     <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
@@ -22,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../../../lib/zTree/zTreeStyle/zTreeStyle.css">
     <script type="text/javascript" src="../../../lib/zTree/js/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="../../../lib/zTree/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
     <script type="text/javascript" src="../../../businessjs/systemConfig/organizationalRole/organizationalRoleListAddForm.js"></script>
     <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
 
@@ -30,30 +34,36 @@
 <body>
     <div style="margin: 15px;">
         <form class="layui-form">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label" style="width:120px;">归属机构<span class="redRqd">*</span></label>
-                    <div class="layui-input-inline" style="width: 300px;">
-                        <select id="orgId" name="orgId" lay-verify="required">
-                            <option value=""></option>
-                         </select>
-                    </div>
+            <div class="layui-form-item" style="position: relative;">
+                <label class="layui-form-label" style="width:120px;">归属单位<span class="redRqd">*</span></label>
+                <input type="text" name="orgId" id="orgId" class="layui-input formWidth" readonly lay-verify="required">
+                <div id="orgIdBox" class="orgIdBox" style="position: absolute;left: 150px;">
+                    <table id="treetable" class="treetable">
+                        <thead>
+                            <tr>
+                                <td>机构名称</td>
+                                <td>操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width:120px;">组织角色名称<span class="redRqd">*</span></label>
-                <input type="text" name="organizationRoleName" class="layui-input" style="width:300px;" lay-verify="required|checkStrlength" wordsLength=100>
+                <input type="text" name="organizationRoleName" class="layui-input" style="width:400px;" lay-verify="required|checkStrlength" wordsLength=100>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width:120px;">组织角色编码<span class="redRqd">*</span></label>
-                <input type="text" name="organizationRoleCode" class="layui-input" style="width:300px;" lay-verify="required|checkStrlength" wordsLength=100>
+                <input type="text" name="organizationRoleCode" class="layui-input" style="width:400px;" lay-verify="required|checkStrlength" wordsLength=100>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label" style="width:120px;">是否启用<span class="redRqd">*</span></label>
-                    <div class="layui-input-inline" style="width: 300px;">
+                    <div class="layui-input-inline" style="width: 400px;">
                         <select id="organizationEnable" name="organizationEnable" lay-verify="required">
                                     <option value="0">否</option>
                                     <option value="1" selected>是</option>
@@ -65,7 +75,7 @@
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label" style="width:120px;">关联公共角色<span class="redRqd">*</span></label>
-                    <div class="layui-input-inline" style="width: 300px;">
+                    <div class="layui-input-inline" style="width: 400px;">
                         <select id="commonRoleId" name="commonRoleId" lay-verify="required" lay-filter="commonRoleIdchange">
                             <option value=""></option>
                         </select>
@@ -75,7 +85,7 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width:120px;">备注</label>
-                <textarea name="organizationMark" lay-verify="checkStrlength" wordsLength=300 style="width:300px;" class="layui-textarea"></textarea>
+                <textarea name="organizationMark" lay-verify="checkStrlength" wordsLength=300 style="width:400px;" class="layui-textarea"></textarea>
             </div>
             <div class="layui-form-item">
                 <div style="margin-left:100px">

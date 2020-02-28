@@ -42,7 +42,7 @@ layui.define(["element", "jquery"], function(exports) {
          * @param url
          */
         this.init = function(menu) {
-            var loading = parent.layer.load(2, { shade: false, time: 2 * 1000 });
+            var loading = parent.layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
             layuimini.initBgColor();
             layuimini.initDevice();
 
@@ -732,7 +732,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 关闭选项卡
      **/
     $('body').on('click', '[data-tab-close]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         $parent = $(this).parent();
         tabId = $parent.attr('lay-id');
         if (tabId != undefined || tabId != null) {
@@ -746,7 +746,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 打开新窗口
      */
     $('body').on('click', '[data-tab]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         var tabId = $(this).attr('data-tab'),
             href = $(this).attr('data-tab'),
             title = $(this).html(),
@@ -794,7 +794,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 在iframe子菜单上打开新窗口
      */
     $('body').on('click', '[data-iframe-tab]', function() {
-        var loading = parent.layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = parent.layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         var tabId = $(this).attr('data-iframe-tab'),
             href = $(this).attr('data-iframe-tab'),
             icon = $(this).attr('data-icon'),
@@ -835,7 +835,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 左侧菜单的切换
      */
     $('body').on('click', '[data-menu]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         $parent = $(this).parent();
         menuId = $(this).attr('data-menu');
         // header
@@ -853,7 +853,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 清理
      */
     $('body').on('click', '[data-clear]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         sessionStorage.clear();
 
         // 判断是否清理服务端
@@ -890,7 +890,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 选项卡操作
      */
     $('body').on('click', '[data-page-close]', function() {
-        var loading = layer.load(0, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(0, { shade: [0.1, true], time: 2 * 1000 });
         var closeType = $(this).attr('data-page-close');
         $(".layui-tab-title li").each(function() {
             tabId = $(this).attr('lay-id');
@@ -914,7 +914,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 菜单栏缩放
      */
     $('body').on('click', '[data-side-fold]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         var isShow = $(this).attr('data-side-fold');
         if (isShow == 1) { // 缩放
             $(this).attr('data-side-fold', 0);
@@ -956,7 +956,7 @@ layui.define(["element", "jquery"], function(exports) {
      * 弹出配色方案
      */
     $('body').on('click', '[data-bgcolor]', function() {
-        var loading = layer.load(2, { shade: false, time: 2 * 1000 });
+        var loading = layer.load(2, { shade: [0.1, true], time: 2 * 1000 });
         var clientHeight = (document.documentElement.clientHeight) - 95;
         var bgColorHtml = layuimini.buildBgColorHtml();
         var html = '<div class="layuimini-color">\n' +

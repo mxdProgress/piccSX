@@ -4,14 +4,10 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
         form = layui.form,
         laytpl = layui.laytpl,
         $ = layui.jquery;
-
-    // checkPagePermissions($);
-    var nowCurr = 1;
     var searchurl = serverconfig.interface.roleCommonRoleList;
     var delurl = serverconfig.interface.roleCommonRoleDeleteCommonRole;
-    var caidanming = "公共角色";
     var par = getdefaultparam();
-    // 请求
+
     function search() {
         jqpost(searchurl, par, true, tplDate);
     }
@@ -28,24 +24,17 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
 
             // 编辑
             $('.editBtn').on('click', function() {
-                layuimini.getTitleDelTab(' 编辑公共角色');
-                // 保存编号
-                var time = new Date().getTime();
-                layui.data('publicRoleListEditForm', {
-                    key: 'operationid' + time,
-                    value: $(this).attr("operationid")
+                var obj = {
+                    operationid: $(this).attr("operationid")
+                }
+                parent.layer.open({
+                    type: 2,
+                    title: "编辑公共角色",
+                    area: ['550px', '90%'],
+                    resize: false,
+                    move: false,
+                    content: 'piccSxHtml/systemConfig/publicRole/publicRoleListEditForm.html?' + getParam(obj)
                 });
-                layui.data('time', {
-                    key: 'time',
-                    value: time
-                })
-
-                // window.parent.tab.tabAdd({
-                //     href: '../piccHtml/sysConfig/publicRole/publicRoleListEditForm.html',
-                //     icon: '',
-                //     id: 'editgonggongjueseWin',
-                //     title: '编辑' + caidanming
-                // });
 
             });
             // 删除
@@ -69,21 +58,6 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
                     }
                 });
             });
-            // 分页
-            // laypage.render({
-            //     elem: 'footBar',
-            //     count: data.count,
-            //     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-            //     jump: function(obj, first) {
-            //         if (!first) {
-            //             par.startPage = obj.curr;
-            //             nowCurr = obj.curr;
-            //             search();
-            //         } else {
-            //             nowCurr = 1;
-            //         }
-            //     }
-            // });
         });
     }
     search();
@@ -94,12 +68,12 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
         jqpost(searchurl, par, true, tplDate);
     });
 
-    //回车执行搜索功能
-    $('#searchValue').keydown(function() { //给输入框绑定按键事件
-        if (event.keyCode == "13") { //判断如果按下的是回车键则执行下面的代码
+    $('#searchValue').keydown(function() {
+        if (event.keyCode == "13") {
             $('.search-btn').click();
         }
     });
+
 
     // 清空按钮
     $('.clear-btn').on('click', function() {
@@ -118,5 +92,16 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
         delete par.roleSort;
         par = getdefaultpageparam(par);
         jqpost(searchurl, par, true, tplDate);
+    });
+
+    $(".add-btn").on('click', function() {
+        parent.layer.open({
+            type: 2,
+            title: "新增公共角色",
+            area: ['650px', '90%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/publicRole/publicRoleListAddForm.html',
+        });
     });
 });

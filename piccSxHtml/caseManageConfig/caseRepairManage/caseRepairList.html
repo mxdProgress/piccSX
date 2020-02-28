@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/caseManageConfig/caseRepairManage/caseRepairList.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin:10px 10px 20px">
+        <div class="search-group">
+            <div class="date-group">
+                <input type="text" class="layui-input" id="queryCondition" style="text-transform: uppercase " autocomplete="off" placeholder="报案号、车牌号">
+            </div>
+            <div class="date-group">
+                <input type="text" style="width:180px;" class="layui-input startTime" id="startTime" autocomplete="off" placeholder="起始时间">
+            </div>
+            <div class="date-group">
+                <input type="text" style="width:180px;" class="layui-input endTime" id="endTime" autocomplete="off" placeholder="结束时间">
+            </div>
+            <div class="date-group layui-form">
+                <div class="layui-form-item" style="width:150px;">
+                    <div class="layui-input-inline" style="margin:0;width:100%">
+                        <select name="" lay-verify="" id="thirdflag">
+                            <option value="">是否三者车</option>
+                            <option value="0">标的车</option>
+                            <option value="1">三者车</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="date-group layui-form">
+                <div class="layui-form-item" style="width:150px;">
+                    <div class="layui-input-inline" style="margin:0;width:100%">
+                        <select name="" lay-verify="" id="webQryStatus">
+                            <option value="">查询状态</option>
+                            <option value="0">全部</option>
+                            <option value="1">待处理</option>
+                            <option value="4">已处理</option>
+
+                            <!-- <option value="2">待送修</option> -->
+                            <!-- <option value="3">待到店</option> -->
+                            <!-- <option value="4">已到店</option> -->
+                            <!-- <option value="5">待评价</option> -->
+                            <!-- <option value="6">已评价</option> -->
+                            <!-- <option value="7">已流失</option> -->
+                            <!-- <option value="8">跟踪随访</option> -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="toolBar-right">
+                <button class="layui-btn layui-btn-sm search-btn">搜索</button>
+                <button class="layui-btn layui-btn-sm clear-btn">清空</button>
+            </div>
+        </div>
+        <table id="caseInfomation" lay-filter="caseInfomation"></table>
+        <!--  {{# if (d.receiveStatus== "0") { }}
+            <button class="layui-btn layui-btn-sm detailBtn" lay-event="detailBtn">详情</button> 
+            {{# if (d.arriveStatus== "1") { }}
+                <button class="layui-btn layui-btn-sm " lay-event="agree">接收案件</button>
+             {{# } }} 
+            {{# } else { }}
+                <button class="layui-btn layui-btn-sm detailBtn" lay-event="detailBtn" data-iframe-tab="piccSxHtml/caseManageConfig/caseRepairManage/caseRepairDetail.html" data-title="送修详情" data-icon="fa fa-window-maximize">详情</button> 
+                {{# if (d.arriveStatus=="1") { }}
+                    <button class="layui-btn layui-btn-sm " lay-event="cancelAgree">取消接收</button> 
+                {{# } }} 
+            {{# } }} -->
+        <script id="barBtn" type="text/html">
+
+            {{# if (d.detailBtn== true) { }}
+            <button class="layui-btn layui-btn-sm detailBtn" lay-event="detailBtn" data-iframe-tab="piccSxHtml/caseManageConfig/caseRepairManage/caseRepairDetail.html" data-title="送修详情" data-icon="fa fa-window-maximize">详情</button> {{# } }} {{# if (d.receiveBtnStatus==
+            1) { }}
+            <button class="layui-btn layui-btn-sm " lay-event="agree">接收案件</button> {{# } }} {{# if(d.receiveBtnStatus==2){ }}
+            <button class="layui-btn layui-btn-sm " lay-event="cancelAgree">取消接收</button> {{# } }}
+
+        </script>
+    </div>
+</body>
+
+</html>

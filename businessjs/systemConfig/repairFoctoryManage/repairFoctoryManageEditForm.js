@@ -6,31 +6,20 @@ layui.use(['form', 'layedit', 'layuimini'], function() {
     var orgId;
     var par = {};
     var getLoginInfo = loginInfo();
-
-    var systemuserManageListEditForm = layui.data('systemuserManageListEditForm');
-    var time = layui.data('time')['time'];
-    var userid = systemuserManageListEditForm['userid' + time];
-    var realName = systemuserManageListEditForm['realName' + time];
-    var phone = systemuserManageListEditForm['phone' + time];
-    var org = systemuserManageListEditForm['orgId' + time];
-    var userName = systemuserManageListEditForm['userName' + time];
-    var passWord = systemuserManageListEditForm['passWord' + time];
-    var orgNames = systemuserManageListEditForm['orgNames' + time];
-
-
+    var urlPar = getParamsFromURL();
     loadJsonDataToForm({
-        realName: realName,
-        phone: phone,
-        orgId: orgNames,
-        userName: userName,
-        passWord: passWord
+        realName: urlPar.realName,
+        phone: urlPar.phone,
+        orgId: urlPar.orgNames,
+        userName: urlPar.userName,
+        passWord: urlPar.passWord
     });
 
 
     function search() {
         par.orgId = getLoginInfo.orgId;
         par.levelFlag = 2;
-        par.orgType = '1';
+        par.orgType = '2';
         // 请求
         jqpost(serverconfig.interface.getOrgList, par, true, tplDate);
     }
@@ -127,9 +116,9 @@ layui.use(['form', 'layedit', 'layuimini'], function() {
     //监听提交
     form.on('submit(demo1)', function(data) {
         data.field.userName = (data.field.userName).trim();
-        data.field.userId = userid;
+        data.field.userId = urlPar.userId;
         if (!orgId) {
-            data.field.orgId = org;
+            data.field.orgId = urlPar.orgId;
         } else {
             data.field.orgId = orgId;
         }
@@ -149,7 +138,7 @@ layui.use(['form', 'layedit', 'layuimini'], function() {
                     //刷新
                     $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                     //关闭
-                    layuimini.getTitleDelTab('编辑用户');
+                    parent.layer.closeAll();
                 }, 1000);
             });
         }

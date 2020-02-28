@@ -16,17 +16,14 @@ $(document).ready(function() {
     zTree = $.fn.zTree;
 });
 
-layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
+layui.use(['form', 'layedit', 'layuimini'], function() {
     var form = layui.form,
         layer = layui.layer,
         layedit = layui.layedit,
-        laydate = layui.laydate,
         $ = layui.jquery;
 
-    var publicRoleListEditForm = layui.data('publicRoleListEditForm');
-    var time = layui.data('time')['time'];
-    var operationids = publicRoleListEditForm['operationid' + time];
-    var pa = { commonRoleId: operationids, type: 1 };
+    var urlPar = getParamsFromURL();
+    var pa = { commonRoleId: urlPar.operationid, type: 1 };
 
     jqpost(serverconfig.interface.roleCommonRoleSelectCommonRole, pa, true, function(data, status, xhr) {
         loadJsonDataToForm(data.detail);
@@ -57,7 +54,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                     //刷新
                     $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                     //关闭
-                    layuimini.getTitleDelTab('编辑公共角色');
+                    parent.layer.closeAll();
                 }, 1000);
             }
         });

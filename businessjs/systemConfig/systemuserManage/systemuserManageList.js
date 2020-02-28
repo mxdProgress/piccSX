@@ -9,7 +9,7 @@ layui.use(['form', 'layer', 'table'], function() {
             elem: '#orgView',
             url: serverconfig.baseurl + serverconfig.interface.findUserListForRole,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -22,13 +22,12 @@ layui.use(['form', 'layer', 'table'], function() {
             },
             page: true,
             limit: pagesize,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -39,10 +38,28 @@ layui.use(['form', 'layer', 'table'], function() {
                     { field: 'phone', title: '手机号' },
                     { field: 'right', width: 300, title: '操作', toolbar: '#barBtn', fixed: 'right' }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
     tableFun();
+
+    $(".add-btn").on('click', function() {
+        parent.layer.open({
+            type: 2,
+            title: "新增用户",
+            area: ['650px', '80%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/systemuserManage/systemuserManageAddForm.html',
+        });
+    });
+
+
 
 
     table.on('tool(orgView)', function(obj) {
@@ -50,40 +67,22 @@ layui.use(['form', 'layer', 'table'], function() {
         var datas = obj.data;
 
         if (event == "editBtn") {
-            layuimini.getTitleDelTab('编辑用户');
-            table.resize('orgView');
-            var time = new Date().getTime();
-            layui.data('time', {
-                key: 'time',
-                value: time
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'userid' + time,
-                value: datas.userId
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'realName' + time,
-                value: datas.realName
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'phone' + time,
-                value: datas.phone
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'orgNames' + time,
-                value: datas.orgNames
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'orgId' + time,
-                value: datas.orgId
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'userName' + time,
-                value: datas.userName
-            });
-            layui.data('systemuserManageListEditForm', {
-                key: 'passWord' + time,
-                value: datas.passWord
+            var obj = {
+                userId: datas.userId,
+                realName: datas.realName,
+                phone: datas.phone,
+                orgNames: datas.orgNames,
+                orgId: datas.orgId,
+                userName: datas.userName,
+                passWord: datas.passWord
+            }
+            parent.layer.open({
+                type: 2,
+                title: "编辑用户",
+                area: ['650px', '80%'],
+                resize: false,
+                move: false,
+                content: 'piccSxHtml/systemConfig/systemuserManage/systemuserManageEditForm.html?' + getParam(obj),
             });
         } else if (event == "deleteBtn") {
             parent.layer.open({
@@ -104,19 +103,18 @@ layui.use(['form', 'layer', 'table'], function() {
                 }
             });
         } else if (event == "selRoleBtn") {
-            layuimini.getTitleDelTab('分配角色');
-            var time = new Date().getTime();
-            layui.data('time', {
-                key: 'time',
-                value: time
-            });
-            layui.data('systemuserManageDistributionForm', {
-                key: 'userId' + time,
-                value: datas.userId
-            });
-            layui.data('systemuserManageDistributionForm', {
-                key: 'orgId' + time,
-                value: datas.orgId
+            var obj = {
+                userId: datas.userId,
+                orgId: datas.orgId
+            }
+
+            parent.layer.open({
+                type: 2,
+                title: "分配角色",
+                area: ['50%', '80%'],
+                resize: false,
+                move: false,
+                content: 'piccSxHtml/systemConfig/systemuserManage/systemuserManageDistributionForm.html?' + getParam(obj),
             });
         } else if (event == "onlockBtn") {
             parent.layer.open({

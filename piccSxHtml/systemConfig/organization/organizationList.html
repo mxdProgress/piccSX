@@ -41,11 +41,11 @@
 </head>
 
 <body>
-    <div style="margin: 0 10px;">
+    <div style="margin: 0 10px 20px 10px;">
         <div class="search-group ">
             <div class="date-group" style="margin-top:12px;">
                 <form class="layui-form">
-                    <input type="radio" name="radio" value="1" title="人保机构" id="rbOrg">
+                    <input type="radio" name="radio" checked value="1" title="人保机构" id="rbOrg">
                     <input type="radio" name="radio" value="2" title="全部" id="all">
                 </form>
 
@@ -53,7 +53,7 @@
             <div class="toolBar-right ">
                 <!-- <input type="text" placeholder="组织机构名称" name="search" class="search">-->
                 <!-- <button class="layui-btn  layui-btn-normal layui-btn-sm search-btn">查询</button> -->
-                <button id="addPb" class="layui-btn  layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/organization/organizationListAddForm.html" data-title="新增机构" data-icon="fa fa-window-maximize">新增</button>
+                <button id="addPb" class="layui-btn  layui-btn-sm add-btn">新增</button>
             </div>
         </div>
         <div id="orgView"></div>
@@ -69,6 +69,7 @@
                     <th>机构编码</th>
                     <th>责任人</th>
                     <th>责任人电话</th>
+                    <th>机构类型</th>
                     <th>备注</th>
                     <th style="width:120px;">操作</th>
                 </tr>
@@ -84,9 +85,14 @@
                         <td>{{ item.comCode || ''}}</td>
                         <td>{{ item.responsiblePerson || ''}}</td>
                         <td>{{ item.responsiblePersonPhone || ''}}</td>
+                        {{# if(item.orgType ==1){ }}
+                        <td>人保机构</td>
+                        {{# }else{ }}
+                        <td>维修单位</td>
+                        {{# } }}
                         <td>{{ item.remark || ''}}</td>
                         <td>
-                            <button orgid="{{ item.orgId }}" class="layui-btn  layui-btn-sm editBtn" data-iframe-tab="piccSxHtml/systemConfig/organization/organizationListEditForm.html" data-title="编辑机构" data-icon="fa fa-window-maximize">编辑</button>
+                            <button orgid="{{ item.orgId }}" parentOrgId="{{item.parentOrgId}}" class="layui-btn layui-btn-sm editBtn" style="float:left">编辑</button>
                             <button orgid="{{ item.orgId }}" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button>
                         </td>
                     </tr>

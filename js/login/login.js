@@ -68,8 +68,8 @@ layui.use(['form'], function() {
         }
 
         function successfuction(data, status, xhr) {
-            cookie.set("token", data.detail.user.token);
-            sessionStorage.setItem('dddd', JSON.stringify(data));
+            cookie.set("tokenKey", data.detail.user.token);
+            sessionStorage.setItem('sessionObj', JSON.stringify(data));
             var psCheck = CheckPassWord($('#password').val());
             if (!psCheck) {
                 layer.msg('密码必须为字母加数字加特殊符号且长度不小于8位');

@@ -22,10 +22,13 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
         laydate = layui.laydate;
     $ = layui.jquery;
 
-    var organizationalRoleListEditForm = layui.data('organizationalRoleListEditForm');
-    var time = layui.data('time')['time'];
-    var organizationRoleId = organizationalRoleListEditForm['organizationRoleId' + time];
-    var pa = { organizationRoleId: organizationRoleId };
+    // var organizationalRoleListEditForm = layui.data('organizationalRoleListEditForm');
+    // var time = layui.data('time')['time'];
+    // var organizationRoleId = organizationalRoleListEditForm['organizationRoleId' + time];
+    // var pa = { organizationRoleId: organizationRoleId };
+
+    var urlPar = getParamsFromURL();
+    var pa = { organizationRoleId: urlPar.organizationRoleId };
 
     //自定义验证规则
     form.verify(formvalidator);
@@ -70,7 +73,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                 //刷新
                 $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                 //关闭
-                layuimini.getTitleDelTab('编辑角色');
+                parent.layer.closeAll();
             }, 1000);
         });
 

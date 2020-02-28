@@ -13,7 +13,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
     function search() {
         par.orgId = getLoginInfo.orgId;
         par.levelFlag = 2;
-        par.orgType = '1';
+        par.orgType = '2';
         // 请求
         jqpost(serverconfig.interface.getOrgList, par, true, tplDate);
     }
@@ -124,7 +124,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                     //刷新
                     $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                     //关闭
-                    layuimini.getTitleDelTab('新增用户');
+                    parent.layer.closeAll();
                 }, 1000);
             });
         }

@@ -8,11 +8,13 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
     var date = getDate();
 
     laydate.render({
-        elem: '#startTime'
+        elem: '#startTime',
+        trigger: 'click'
     });
 
     laydate.render({
-        elem: '#endTime'
+        elem: '#endTime',
+        trigger: 'click'
     });
 
     $("#startTime").val(getCurrentMonthFirst());
@@ -43,7 +45,7 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
             elem: '#orgView',
             url: serverconfig.baseurl + serverconfig.interface.queryCouponInfo,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -57,13 +59,12 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
             },
             page: true,
             limit: pagesize,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -76,10 +77,15 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
                     { field: 'detailDesc', title: '优惠描述' },
                     { field: 'right', title: '操作', toolbar: '#barBtn', fixed: 'right' }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
-    tableFun(getCurrentMonthFirst() + " 00-00-00", getCurrentMonthLast() + " 23:59:59");
+    tableFun(getCurrentMonthFirst() + " 00:00:00", getCurrentMonthLast() + " 23:59:59");
 
 
     table.on('tool(orgView)', function(obj) {
@@ -100,7 +106,7 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
             parent.layer.open({
                 type: 2,
                 title: "编辑优惠券",
-                area: ['50%', '90%'],
+                area: ['50%', '98%'],
                 resize: false,
                 move: false,
                 content: '/piccSxHtml/repairCompany/couponConfig/couponEdit.html?' + getParam(obj),
@@ -133,7 +139,7 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
         parent.layer.open({
             type: 2,
             title: "新增优惠券",
-            area: ['50%', '90%'],
+            area: ['50%', '98%'],
             resize: false,
             move: false,
             content: '/piccSxHtml/repairCompany/couponConfig/couponAdd.html',
@@ -142,7 +148,7 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
 
     // 查询
     $('.search-btn').on('click', function() {
-        tableFun();
+        tableFun($("#startTime").val(), $("#endTime").val());
     });
 
     //回车执行搜索功能

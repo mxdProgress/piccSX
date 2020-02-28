@@ -8,7 +8,18 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
     var getLoginInfo = loginInfo();
     par.orgId = getLoginInfo.orgId;
     par.levelFlag = 2;
-    par.orgType = '2';
+    par.orgType = '1';
+
+    $(".add-btn").on('click', function() {
+        parent.layer.open({
+            type: 2,
+            title: "新增机构",
+            area: ['600px', '95%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/organization/organizationListAddForm.html',
+        });
+    });
 
     function search() {
         // 请求
@@ -26,16 +37,19 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
             orgView.innerHTML = html;
             // 编辑
             $('.editBtn').on('click', function() {
-                layuimini.getTitleDelTab('编辑机构');
-                var time = new Date().getTime();
-                layui.data('organizationListEditForm', {
-                    key: 'orgId' + time,
-                    value: $(this).attr("orgId")
+                var obj = {
+                    orgId: $(this).attr("orgId"),
+                    parentOrgId: $(this).attr("parentOrgId")
+                }
+                parent.layer.open({
+                    type: 2,
+                    title: "编辑机构",
+                    area: ['650px', '95%'],
+                    resize: false,
+                    move: false,
+                    content: 'piccSxHtml/systemConfig/organization/organizationListEditForm.html?' + getParam(obj),
                 });
-                layui.data('time', {
-                    key: 'time',
-                    value: time
-                })
+
             });
             // 删除
             $('.delBtn').on('click', function() {
@@ -105,26 +119,20 @@ layui.use(['form', 'laypage', 'layer', 'laytpl', 'layuimini'], function() {
                         } else {
                             html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-branch="true" data-tt-parent-id="' + id + '">';
                         }
-                        html += '<td>' + da[i].orgName + '</td><td>' + da[i].simpleName + '</td><td>' + da[i].comCode + '</td><td>' + da[i].responsiblePerson + ' </td><td>' + da[i].responsiblePersonPhone + '</td> <td> ' + da[i].remark + ' </td>';
-                        html += '<td><button orgId="' + da[i].orgId + '" class="layui-btn  layui-btn-sm editBtn"data-iframe-tab="piccSxHtml/systemConfig/organization/organizationListEditForm.html" data-title="编辑机构" data-icon="fa fa-window-maximize">编辑</button>';
+                        html += '<td>' + da[i].orgName + '</td><td>' + da[i].simpleName + '</td><td>' + da[i].comCode + '</td><td>' + da[i].responsiblePerson + ' </td><td>' + da[i].responsiblePersonPhone + '</td>';
+                        if (da[i].orgType == 1) {
+                            html += '<td>人保机构</<td>';
+                        } else {
+                            html += '<td>维修单位</<td>';
+                        }
+                        html += '<td>' + da[i].remark + ' </td>';
+                        html += '<td><button orgId="' + da[i].orgId + '" parentOrgId="' + da[i].parentOrgId + '" onclick="editclickMe(this)" class="layui-btn  layui-btn-sm editBtn">编辑</button>';
                         html += '<button orgId="' + da[i].orgId + '" onclick="clickMe(this)" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button></td>';
                         html += '</tr>';
                     }
                 }
                 //子节点数据插入父节点
                 $("#treetable").treetable("loadBranch", parentNode, html);
-                $(".editBtn").on('click', function() {
-                    layuimini.getTitleDelTab('编辑机构');
-                    var time = new Date().getTime();
-                    layui.data('organizationListEditForm', {
-                        key: 'orgId' + time,
-                        value: $(this).attr("orgId")
-                    });
-                    layui.data('time', {
-                        key: 'time',
-                        value: time
-                    })
-                });
             }
         });
 
@@ -153,4 +161,21 @@ function clickMe(t) {
         });
     });
 
+}
+
+function editclickMe(t) {
+    layui.use(['layer'], function() {
+        var obj = {
+            orgId: $(t).attr("orgId"),
+            parentOrgId: $(t).attr("parentOrgId")
+        }
+        parent.layer.open({
+            type: 2,
+            title: "编辑机构",
+            area: ['650px', '95%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/organization/organizationListEditForm.html?' + getParam(obj),
+        });
+    });
 }

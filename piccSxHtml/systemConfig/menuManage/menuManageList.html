@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <div style="margin:0 10px">
+    <div style="margin:0 10px 20px 10px">
         <div class="search-group">
             <div class="toolBar-right ">
-                <button class="layui-btn  layui-btn-normal layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/menuManage/menuManageAdd.html" data-title="新增功能菜单" data-icon="fa fa-window-maximize" style="background-color: #1AA194;" customValidation="gongnengcaidanweihuxinzeng">新增</button>
+                <button class="layui-btn  layui-btn-normal layui-btn-sm add-btn" style="background-color: #1AA194;" customValidation="gongnengcaidanweihuxinzeng">新增</button>
             </div>
         </div>
         <div id="orgView"></div>
@@ -47,11 +47,15 @@
                     <td>{{ item.orderNum.toString() || ''}}</td>
                     <td>{{ item.remark || ''}}</td>
                     <td>
-                        <button funcId="{{ item.funcId }}" hrefId="manageEdit" data-iframe-tab="piccSxHtml/systemConfig/menuManage/menuManageEdit.html" data-title="编辑功能菜单" data-icon="fa fa-window-maximize" class="layui-btn layui-btn-sm editBtn">编辑</button>
+                        <button funcId="{{ item.funcId }}" hrefId="manageEdit" class="layui-btn layui-btn-sm editBtn">编辑</button>
                         <button funcId="{{ item.funcId }}" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button>
                     </td>
                 </tr>
-                {{# }); }} {{# if(d.length === 0){ }} 无数据 {{# } }}
+                {{# }); }} {{# if(d.length === 0){ }}
+                <tr>
+                    <td colspan='7' style="text-align:center;">无数据</td>
+                </tr>
+                {{# } }}
             </tbody>
         </table>
     </script>

@@ -26,7 +26,8 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
             isPage: "0",
             comCode: LoginInfo.comCode,
             factorycode: LoginInfo.factorycode,
-            id: id
+            id: id,
+            listOrDetail: 2
         }
         jqpost(serverconfig.interface.caseQueryCaseList, pa, true, function(data) {
             if (data.list != null) {
@@ -53,7 +54,7 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
             elem: '#processDetail',
             url: serverconfig.baseurl + serverconfig.interface.caseQueryProcessDetail,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -65,13 +66,12 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
             },
             page: true,
             limit: 10,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -79,7 +79,12 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
                     { field: 'remark', title: '描述' },
                     { field: 'operateTime', title: '操作时间', }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
 
@@ -88,7 +93,7 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
             elem: '#sendRepairProcess',
             url: serverconfig.baseurl + serverconfig.interface.caseQuerySendRepairProcess,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -102,13 +107,12 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
             },
             page: true,
             limit: 10,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -119,7 +123,12 @@ layui.use(['form', 'element', 'layer', 'table', 'laydate'], function() {
                     { field: 'inserttime', title: '操作时间' },
                     { field: 'thirdflag', title: '是否三者车' }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
 

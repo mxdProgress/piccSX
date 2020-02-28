@@ -26,7 +26,7 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini', 'laydate'], function
             elem: '#table',
             url: serverconfig.baseurl + serverconfig.interface.queryProblem,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -43,13 +43,12 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini', 'laydate'], function
             },
             page: true,
             limit: pagesize,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -61,7 +60,12 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini', 'laydate'], function
                     { field: 'problemDesc', title: '问题描述' },
                     { field: 'right', width: 200, title: '操作', toolbar: '#barDemo' }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
     tableFun();

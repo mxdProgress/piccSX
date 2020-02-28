@@ -122,7 +122,7 @@ layui.use(['form', 'layedit', 'laydate', 'layuimini'], function() {
                     //刷新
                     $(".layui-tab-item.layui-show", parent.document).find("iframe")[0].contentWindow.location.reload();
                     //关闭
-                    layuimini.getTitleDelTab('新增用户');
+                    parent.layer.closeAll();
                 }, 1000);
             });
         }

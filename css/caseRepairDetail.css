@@ -1,0 +1,160 @@
+body {
+    background: #eee;
+}
+
+.detailBox {
+    margin: 10px;
+    background: #fff;
+    /* overflow: hidden; */
+    padding: 0 15px 5px;
+    font-size: 13px;
+    border-radius: 2px;
+}
+
+.detailBox h3 {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    margin: 7px 0;
+    position: relative;
+}
+
+.detailBox h3 span {
+    display: inline-block;
+    width: 3px;
+    vertical-align: top;
+    height: 20px;
+    background: rgb(115, 115, 115);
+    margin-right: 7px;
+}
+
+.upHidden {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.downShow {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    display: none;
+}
+
+.layui-table {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tableInfo tr td {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 9px 7px;
+}
+
+.tableInfo tr td:nth-child(2n+1) {
+    text-align: right;
+    font-weight: bold;
+}
+
+.repairStyle {
+    margin: 10px;
+}
+
+.addressSearch,
+.orgSearch {
+    margin: 15px 0;
+    display: none;
+}
+
+.factoryAddress,
+.factoryAddressSearch,
+.addressSearch p span,
+.statusBtn,
+.statusBtn1 {
+    float: left;
+}
+
+.factoryAddressSearch {
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.addressSearch p span {
+    line-height: 38px;
+}
+
+.factoryAddress {
+    width: 500px;
+}
+
+#secondRepair {
+    display: none;
+}
+
+.layui-anim-upbit {
+    height: 220px;
+}
+
+.fa-search:before {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.ydd,
+.yls,
+.gzsf,
+#enterINfo,
+#losssInfoBox,
+.alterBox,
+#repairInfo,
+#repairRecord,
+.statusBtn button {
+    display: none;
+}
+
+.lossList {
+    display: none;
+    border: 1px #D2D2D2 solid;
+    border-radius: 2px;
+    position: absolute;
+    top: 37px;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: #fff;
+}
+
+.lossList ul li {
+    line-height: 35px;
+    padding-left: 10px;
+}
+
+.lossList ul li:hover {
+    background: #5FB878;
+    color: #fff;
+    cursor: pointer;
+}
+
+.alterBox {
+    padding: 30px 30px 0 0;
+}
+
+.sxgp {
+    float: left;
+    display: none;
+}
+
+.statusBtn button {
+    float: left;
+}
+
+.statusBtn b {
+    height: 30px;
+    border-left: 1px #ccc solid;
+    margin: 0 15px;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+}

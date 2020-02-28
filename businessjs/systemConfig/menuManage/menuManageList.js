@@ -13,7 +13,6 @@ layui.use(['laypage', 'layer', 'laytpl', 'layuimini'], function() {
         jqpost(serverconfig.interface.maintenanceGetMaintenanceTree, par, true, tplDate);
     }
 
-
     // 渲染模板
     function tplDate(data, status, xhr) {
         var getTpl = orgTpl.innerHTML;
@@ -38,23 +37,22 @@ layui.use(['laypage', 'layer', 'laytpl', 'layuimini'], function() {
             orgView.innerHTML = html;
             // 编辑
             $('.editBtn').on('click', function() {
-                layuimini.getTitleDelTab(' 编辑功能菜单');
-                // 保存编号
-                var time = new Date().getTime();
-                layui.data('menuManagementListEditForm', {
-                    key: 'funcId' + time,
-                    value: $(this).attr("funcId")
+                var obj = {
+                    funcId: $(this).attr("funcId")
+                }
+                parent.layer.open({
+                    type: 2,
+                    title: "编辑功能菜单",
+                    area: ['600px', '98%'],
+                    resize: false,
+                    move: false,
+                    content: 'piccSxHtml/systemConfig/menuManage/menuManageEdit.html?' + getParam(obj),
                 });
-                layui.data('time', {
-                    key: 'time',
-                    value: time
-                })
-
             });
             // 删除
             $('.delBtn').on('click', function() {
                 var delId = $(this).attr("funcId");
-                layer.open({
+                parent.layer.open({
                     title: '',
                     maxmin: false,
                     type: 1,
@@ -66,8 +64,8 @@ layui.use(['laypage', 'layer', 'laytpl', 'layuimini'], function() {
                         pm.funcId = delId;
                         jqpost(serverconfig.interface.maintenanceDeleteMaintenance, pm, true, function(data) {
                             if (data.status == 1) {
-                                layer.close(index);
-                                layuimini.msg_success('删除成功！');
+                                parent.layer.close(index);
+                                parent.layuimini.msg_success('删除成功！');
                                 jqpost(serverconfig.interface.maintenanceGetMaintenanceTree, par, true, tplDate);
                             }
                         });
@@ -81,4 +79,17 @@ layui.use(['laypage', 'layer', 'laytpl', 'layuimini'], function() {
         });
     }
     search();
+
+
+    $(".add-btn").on('click', function() {
+        parent.layer.open({
+            type: 2,
+            title: "新增用户",
+            area: ['600px', '98%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/menuManage/menuManageAdd.html',
+        });
+    });
+
 });

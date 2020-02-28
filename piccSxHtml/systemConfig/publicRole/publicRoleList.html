@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div style="margin: 0 10px;">
+    <div style="margin: 0 10px 20px 0;">
         <div class="search-group">
             <div class="date-group">
                 <div class="layui-inline">
@@ -25,7 +25,7 @@
             <div class="toolBar-right">
                 <button class="layui-btn layui-btn-sm search-btn">搜索</button>
                 <button class="layui-btn layui-btn-sm clear-btn">清空</button>
-                <button class="layui-btn layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/publicRole/publicRoleListAddForm.html" data-title="新增公共角色" data-icon="fa fa-window-maximize">新增</button>
+                <button class="layui-btn layui-btn-sm add-btn">新增</button>
             </div>
             <div class="clear"></div>
         </div>
@@ -52,7 +52,7 @@
                     <td>{{ item.commonRemark || ''}}</td>
                     <td>
 
-                        <button operationid="{{ item.commonRoleId }}" data-iframe-tab="piccSxHtml/systemConfig/publicRole/publicRoleListEditForm.html" data-title="编辑公共角色" data-icon="fa fa-window-maximize" class="layui-btn  layui-btn-sm editBtn">编辑</button>
+                        <button operationid="{{ item.commonRoleId }}" class="layui-btn  layui-btn-sm editBtn">编辑</button>
                         <button operationid="{{ item.commonRoleId }}" class="layui-btn layui-btn-danger layui-btn-sm delBtn">删除</button>
 
                     </td>

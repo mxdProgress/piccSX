@@ -6,20 +6,116 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
         $ = layui.jquery;
     // 初始化上级机构下拉框
     var loginInfo = getLoginInfo();
-    getdgtree("orgId");
+    var checkOrgId;
 
-    function tableFun(st, et) {
+
+    function searchGetOrg() {
+        par.orgId = loginInfo.orgId;
+        par.levelFlag = 2;
+        par.orgType = '1';
+        // 请求
+        jqpost(serverconfig.interface.getOrgList, par, true, function(data) {
+            $("#treetable tbody").empty();
+            var da = data.list;
+            filterJsonObj(da);
+            if (da.length > 0) {
+                var html = '';
+                var orgids;
+                for (var i = 0; i < da.length; i++) {
+                    var orgIdLen = da[i].orgId;
+                    if (orgIdLen.length > 3) {
+                        orgids = da[i].orgId.substr(0, da[i].orgId.length - 4);
+                    } else {
+                        orgids = '';
+                    }
+                    if (da[i].parent == false) {
+                        html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-parent-id="' + orgids + '">';
+                    } else {
+                        html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-branch="true" data-tt-parent-id="' + orgids + '">';
+                    }
+                    html += '<td>' + da[i].orgName + '</td>';
+                    html += '<td style="width:50px;"><button orgId="' + da[i].orgId + '" orgName="' + da[i].orgName + '" class="layui-btn layui-btn-sm selectBtn" >选择</button>';
+                    html += '</tr>';
+                }
+                $("#treetable tbody").append(html);
+                $(".selectBtn").on('click', function() {
+                    checkOrgId = $(this).attr('orgId');
+                    var tdVal = $(this).attr('orgName');
+                    $("#orgId").val(tdVal);
+                    $("#orgIdBox").hide();
+                    return false;
+                })
+            }
+
+            $("#treetable").treetable({
+                expandable: true,
+                onNodeExpand: nodeExpand
+            });
+        });
+    }
+    searchGetOrg();
+
+    function nodeExpand() {
+        getNodeViaAjax(this.id);
+    }
+
+    function getNodeViaAjax(id) {
+        par.orgId = id;
+        jqpost(serverconfig.interface.getOrgList, par, true, function(da) {
+            var da = da.list;
+            filterJsonObj(da);
+            if (da != null) {
+                var html = '';
+                //获得父节点
+                var parentNode = $("#treetable").treetable("node", id);
+
+                for (var i = 0; i < da.length; i++) {
+                    var nodeToAdd = $("#treetable").treetable("node", da[i].orgId);
+                    if (!nodeToAdd) {
+                        if (da[i].parent == false) {
+                            html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-parent-id="' + id + '">';
+                        } else {
+                            html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-branch="true" data-tt-parent-id="' + id + '">';
+                        }
+                        html += '<td>' + da[i].orgName + '</td>';
+                        html += '<td style="width:50px;"><button orgId="' + da[i].orgId + '" orgName="' + da[i].orgName + '" class="layui-btn layui-btn-sm selectBtn" >选择</button>';
+                        html += '</tr>';
+                    }
+                }
+                //子节点数据插入父节点
+                $("#treetable").treetable("loadBranch", parentNode, html);
+                $(".selectBtn").on('click', function() {
+                    checkOrgId = $(this).attr('orgId');
+                    var tdVal = $(this).attr('orgName');
+                    $("#orgId").val(tdVal);
+                    $("#orgIdBox").hide();
+                    return false;
+                })
+
+            }
+        });
+
+    }
+
+
+    $("#orgId").on('click', function() {
+        $("#orgIdBox").slideToggle(100);
+    });
+
+
+    function tableFun(orgId) {
+
         table.render({
             elem: '#tableId',
             url: serverconfig.baseurl + serverconfig.interface.queryUserFacRelation,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
-                searchValue: $("#searchValue").val(),
+                queryCondition: $("#searchValue").val(),
                 userId: getLoginInfo.userId,
-                orgId: $("#orgId").val(),
+                orgId: orgId,
                 factorycode: getLoginInfo.factorycode
             },
             request: {
@@ -28,13 +124,12 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
             },
             page: true,
             limit: pagesize,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -45,7 +140,12 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
                     { field: 'factoryName', title: '维修单位名称', },
                     { field: 'address', title: '维修单位地址' },
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
     tableFun();
@@ -117,7 +217,12 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
 
     // 查询
     $('.search-btn').on('click', function() {
-        tableFun();
+        if (!checkOrgId) {
+            var orgId = loginInfo.orgId;
+        } else {
+            var orgId = checkOrgId;
+        }
+        tableFun(orgId);
     });
 
     //回车执行搜索功能
@@ -132,7 +237,7 @@ layui.use(['form', 'layer', 'table', 'laydate'], function() {
         $("#searchValue").val('');
         $("#orgId").val('');
         form.render();
-        tableFun();
+        tableFun('');
     });
 
 });

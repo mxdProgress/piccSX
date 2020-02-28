@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="../../../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.css">
+    <link rel="stylesheet" type="text/css" href="../../../lib/jquerytreetable/css/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/commonHeader.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/commonTreeTable.css" media="all" />
+    <script type="text/javascript" src="../../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui-v2.5.4/layui.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/constant.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../businessjs/common/util.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../lib/jquerytreetable/jquery.treetable.js"></script>
+    <script type="text/javascript" src="../../../businessjs/repairCount/sendRepairOrgSta/sendRepairOrgStalist.js"></script>
+    <script type="text/javascript" src="../../../js/login/checkLogin.js"></script>
+</head>
+
+<body>
+    <div style="margin:10px 10px 20px">
+        <div class="search-group">
+            <div class="date-group">
+                <input type="text" style="width:150px;" class="layui-input startTime" id="startTime" autocomplete="off" placeholder="起始时间">
+            </div>
+            <div class="date-group">
+                <input type="text" style="width:150px;" class="layui-input endTime" id="endTime" autocomplete="off" placeholder="结束时间">
+            </div>
+            <div class="date-group layui-form">
+                <div class="layui-form-item" style="width:150px;">
+                    <div class="layui-input-inline" style="margin:0;width:100%">
+                        <select name="" lay-verify="" id="thirdflag">
+                            <option value="">是否三者车</option>
+                            <option value="0">标的车</option>
+                            <option value="1">三者车</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="date-group layui-form">
+                <div class="layui-form-item" style="width:150px;">
+                    <div class="layui-input-inline" style="margin:0;width:100%">
+                        <select name="" lay-verify="" id="resourceflag">
+                            <option value="">资源类型</option>
+                            <option value="0">公共资源</option>
+                            <option value="1">承保资源</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="date-group">
+                <div class="layui-form-item" style="position: relative;">
+                    <input type="text" name="orgId" id="surveyAdd" placeholder="查勘属地" style="width:200px;" comCode="" class="layui-input formWidth orgId" readonly lay-verify="required">
+                    <div id="orgIdBox" class="orgIdBox" style="left:0">
+                        <table id="treetable" class="treetable">
+                            <thead>
+                                <tr>
+                                    <td>机构名称</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="date-group">
+                <div class="layui-form-item" style="position: relative;">
+                    <input type="text" name="orgId" id="policyAdd" placeholder="保单归属机构" style="width:200px;" policycomcode="" class="layui-input formWidth orgId" readonly lay-verify="required">
+                    <div id="orgIdBox" class="orgIdBox" style="left:0">
+                        <table id="treetable" class="treetable1">
+                            <thead>
+                                <tr>
+                                    <td>机构名称</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolBar-right">
+                <button class="layui-btn layui-btn-sm search-btn">搜索</button>
+                <button class="layui-btn layui-btn-sm clear-btn">清空</button>
+            </div>
+        </div>
+        <!-- <table id="caseInfomation" lay-filter="caseInfomation"></table> -->
+        <div id="templateView"></div>
+        <div id="demo20"></div>
+
+
+        <script id="templateTpl" type="text/html">
+            <table id="treetable" class="layui-table">
+                <thead>
+                    <tr>
+                        <th>查勘属地</th>
+                        <th>出险案件量</th>
+                        <th>送修案件量</th>
+                        <th>一次成功量</th>
+                        <th>二修成功量</th>
+                        <th>总成功量</th>
+                        <th>送修率</th>
+                        <th>一次成功率</th>
+                        <th>二次成功率</th>
+                        <th>总成功率</th>
+                        <th>流失率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{# layui.each(d, function(index, item){ }}
+                    <tr>
+                        <td>{{ item.registcomcode}}</td>
+                        <td>{{ item.cxCount}}</td>
+                        <td>{{ item.sxCount}}</td>
+                        <td>{{ item.ycsxcgCount}}</td>
+                        <td>{{ item.ecsxcgCount}}</td>
+                        <td>{{ item.zcgCount}}</td>
+                        <td>{{ item.sxRate}}</td>
+                        <td>{{ item.ycsxcgRate}}</td>
+                        <td>{{ item.ecsxcgRate}}</td>
+                        <td>{{ item.zcgRate}}</td>
+                        <td>{{ item.lossRate}}</td>
+                    </tr>
+                    {{# }); }}{{# if(d.length === 0){ }}
+                    <tr>
+                        <td colspan='11' style="text-align:center;">无数据</td>
+                    </tr>
+                    {{# } }}
+                </tbody>
+            </table>
+        </script>
+    </div>
+</body>
+</body>

@@ -51,8 +51,9 @@ function jqpost(url, par, tokenflag, successfuction, errorfuction, operationobj,
             url = serverconfig.baseurl + url;
         }
     }
-
-    var loading = parent.layer.load(2, { shade: false });
+    var loading = parent.layer.load(2, {
+        shade: [0.1, true]
+    });
     var aa = {
         type: "POST",
         url: url,
@@ -67,6 +68,7 @@ function jqpost(url, par, tokenflag, successfuction, errorfuction, operationobj,
                     refreshfunction(operationobj);
                 }
             } else {
+                console.log('utilJs error');
                 errorfuction(data, status, xhr, operationobj);
             }
         },
@@ -81,7 +83,7 @@ function jqpost(url, par, tokenflag, successfuction, errorfuction, operationobj,
         }
     }
     if (tokenflag == true) {
-        aa["headers"] = { token: cookie.get("token") }
+        aa["headers"] = { token: cookie.get("tokenKey") }
     }
     $.ajax(aa);
 }
@@ -108,11 +110,8 @@ function refreshfunction(operationobj) {
 function errorfunction(data, status, xhr, operationobj) {
     if (data.status != null) {
         if (data.status == 2 || data.status == 3) {
-            if (window.top !== window.self) {
-                window.location = '../../../login.html';
-            } else {
-                window.location = '../../../login.html';
-            }
+            console.log('utiljs status==3');
+            window.location = '../../../login.html';
         } else {
             parent.layer.open({
                 title: '',
@@ -133,7 +132,7 @@ function CheckPassWord(password) { //必须为字母加数字加特殊符号且�
 }
 // 获取用户信息
 function getLoginInfo() {
-    var dddd = JSON.parse(sessionStorage.getItem('dddd'));
+    var dddd = JSON.parse(sessionStorage.getItem('sessionObj'));
     return dddd.detail.user;
 }
 
@@ -163,7 +162,7 @@ function checkPagePermissions($) {
 
 // 检查权限
 function checkPermissions(permissions) {
-    var dddd = JSON.parse(sessionStorage.getItem('dddd'));
+    var dddd = JSON.parse(sessionStorage.getItem('sessionObj'));
     var permissionsist = permissions.split(',');
     for (var i in dddd.detail.maintenanceTargetList) {
         for (var j in permissionsist) {
@@ -187,7 +186,7 @@ function checkPageCommonRoleList($) {
 
 // 检查角色
 function checkCommonRoleList(Role) {
-    var dddd = JSON.parse(sessionStorage.getItem('dddd'));
+    var dddd = JSON.parse(sessionStorage.getItem('sessionObj'));
     var rolelist = Role.split(',');
     for (var i in dddd.detail.commonRoleList) {
         for (var j in rolelist) {
@@ -197,6 +196,29 @@ function checkCommonRoleList(Role) {
         }
     }
     return false;
+}
+
+// 确认是否拥有快捷方式权限
+function checkKjfsQx(titleName) {
+    if (titleName) {
+        var data = JSON.parse(sessionStorage.getItem('sessionObj'));
+        var navs = data.detail.maintenanceTree.children;
+        var hasQx = false;
+        for (info in navs) {
+            if (navs[info].title == titleName) {
+                hasQx = true;
+                break;
+            }
+            var infoChildren = navs[info].children;
+            for (cn in infoChildren) {
+                if (infoChildren[cn].title == titleName) {
+                    hasQx = true;
+                    break;
+                }
+            }
+        }
+        return hasQx;
+    }
 }
 
 // 生成单位选择下拉框
@@ -404,7 +426,7 @@ function getParamsFromURL() {
 }
 //用户信息
 function loginInfo() {
-    var loginInfo = JSON.parse(sessionStorage.getItem('dddd'));
+    var loginInfo = JSON.parse(sessionStorage.getItem('sessionObj'));
     return loginInfo.detail.user;
 }
 //筛选后台null数据替换空字符串
@@ -457,4 +479,166 @@ function getCurrentMonthLast(dt) {
     var oneDay = 1000 * 60 * 60 * 24;
     var d = new Date(nextMonthFirstDay - oneDay);
     return d.getFullYear() + '-' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1) + '-' + (d.getDate() < 10 ? '0' + d.getDate() : d.getDate());
+}
+//日期不能夸年、月
+function sameMonth(startTime, endTime) {
+    var startTime = new Date(startTime.replace(new RegExp("-", "gm"), "/"));
+    var endTime = new Date(endTime.replace(new RegExp("-", "gm"), "/"));
+    if (startTime.getFullYear() != endTime.getFullYear()) {
+        layer.msg('日期不能夸年');
+        return false;
+    }
+    if (startTime.getMonth() != endTime.getMonth()) {
+        layer.msg('日期不能夸月');
+        return false;
+    }
+}
+/**
+ * a   标签
+ * org  orgID
+ * orgType  1 人保机构  2全部
+ * **/
+function treeFun(a, org, orgType) {
+    var par = {};
+
+    function search() {
+        par.orgId = org;
+        par.levelFlag = 2;
+        par.orgType = orgType;
+        delete par.tokenId;
+        // 请求
+        jqpost(serverconfig.interface.getOrgList, par, true, function(data) {
+            $("." + a + " tbody").empty();
+            var da = data.list;
+            filterJsonObj(da);
+            if (da.length > 0) {
+                var html = '';
+                var orgids;
+                for (var i = 0; i < da.length; i++) {
+                    var orgIdLen = da[i].orgId;
+                    if (orgIdLen.length > 3) {
+                        orgids = da[i].orgId.substr(0, da[i].orgId.length - 4);
+                    } else {
+                        orgids = '';
+                    }
+                    if (da[i].parent == false) {
+                        html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-parent-id="' + orgids + '">';
+                    } else {
+                        html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-branch="true" data-tt-parent-id="' + orgids + '">';
+                    }
+                    html += '<td>' + da[i].orgName + '</td>';
+                    html += '<td style="width:50px;"><button orgId="' + da[i].orgId + '"comCode="' + da[i].comCode + '"  orgName="' + da[i].orgName + '" class="layui-btn layui-btn-sm selectBtn" >选择</button>';
+                    html += '</tr>';
+                }
+                $("." + a + " tbody").append(html);
+                $(".selectBtn").on('click', function() {
+                    var elem = $(this).parents('.orgIdBox').siblings('.orgId');
+                    orgId = $(this).attr('orgId');
+                    var tdVal = $(this).attr('orgName');
+                    elem.val(tdVal).attr("comCode", $(this).attr('comCode')).attr("orgId", $(this).attr('orgId'));
+                    $(this).parents('.orgIdBox').hide();
+                    return false;
+                })
+            }
+
+            $("." + a).treetable({
+                expandable: true,
+                onNodeExpand: nodeExpand
+            });
+        });
+    }
+    search();
+
+    function nodeExpand() {
+        getNodeViaAjax(this.id);
+    }
+
+    function getNodeViaAjax(id) {
+        par.orgId = id;
+        jqpost(serverconfig.interface.getOrgList, par, true, function(da) {
+            var da = da.list;
+            filterJsonObj(da);
+            if (da != null) {
+                var html = '';
+                //获得父节点
+                var parentNode = $("." + a).treetable("node", id);
+
+                for (var i = 0; i < da.length; i++) {
+                    var nodeToAdd = $("." + a).treetable("node", da[i].orgId);
+                    if (!nodeToAdd) {
+                        if (da[i].parent == false) {
+                            html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-parent-id="' + id + '">';
+                        } else {
+                            html += '<tr data-tt-id="' + da[i].orgId + '" data-tt-branch="true" data-tt-parent-id="' + id + '">';
+                        }
+                        html += '<td>' + da[i].orgName + '</td>';
+                        html += '<td style="width:50px;"><button orgId="' + da[i].orgId + '"comCode="' + da[i].comCode + '" orgName="' + da[i].orgName + '" class="layui-btn layui-btn-sm selectBtn" >选择</button>';
+                        html += '</tr>';
+                    }
+                }
+                //子节点数据插入父节点
+                $("." + a).treetable("loadBranch", parentNode, html);
+                $(".selectBtn").on('click', function() {
+                    var elem = $(this).parents('.orgIdBox').siblings('.orgId');
+                    orgId = $(this).attr('orgId');
+                    var tdVal = $(this).attr('orgName');
+                    elem.val(tdVal).attr("comCode", $(this).attr('comCode')).attr("policycomcode", $(this).attr('comCode')).attr("orgId", $(this).attr('orgId'));
+                    $(this).parents('.orgIdBox').hide();
+                    $('.' + a).treetable("collapseAll");
+                    return false;
+                })
+
+            }
+        });
+
+    }
+
+}
+//回车
+function enterKey(btnClass) {
+    $(document).keydown(function() {
+        if (event.keyCode == "13") {
+            $(btnClass).click();
+        }
+    });
+}
+
+//table 渲染公共方法
+function tablePost(ele, url, sort, par, cols) {
+    if (!url.startWith("http")) {
+        url = serverconfig.baseurl + url;
+    }
+    layui.use(['table'], function() {
+        var layer = layui.layer,
+            table = layui.table,
+            $ = layui.jquery;
+        table.render({
+            elem: ele,
+            url: url,
+            method: "POST",
+            headers: { token: cookie.get("tokenKey") },
+            contentType: "application/json; charset=utf-8",
+            sort: sort,
+            where: par,
+            request: {
+                pageName: 'startPage',
+                limitName: 'pageSize'
+            },
+            page: true,
+            limit: pagesize,
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
+            },
+            cols: [cols],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
+        });
+    });
 }

@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div style="margin: 10px;">
+    <div style="margin: 10px 10px 20px;">
         <div class="search-group">
             <div class="date-group">
                 <input class="search layui-input" type="text" id="searchValue" placeholder="用户名、姓名" name="search">
@@ -30,7 +30,7 @@
             <div class="toolBar-right">
                 <button class="layui-btn  layui-btn-sm search-btn">搜索</button>
                 <button class="layui-btn  layui-btn-sm clear-btn">清空</button>
-                <button class="layui-btn  layui-btn-sm add-btn" data-iframe-tab="piccSxHtml/systemConfig/repairFoctoryManage/repairFoctoryManageAddForm.html" data-title="新增用户" data-icon="fa fa-window-maximize">新增</button>
+                <button class="layui-btn  layui-btn-sm add-btn">新增</button>
                 <button class="layui-btn  layui-btn-sm " id="importTemplate">导入模板下载</button>
                 <button class="layui-btn  layui-btn-sm " id="importRepairs">导入维修员</button>
             </div>
@@ -39,7 +39,7 @@
         <table id="orgView" lay-filter="orgView"></table>
     </div>
     <script id="barBtn" type="text/html">
-        <button class="layui-btn  layui-btn-sm editBtn" lay-event="editBtn" data-iframe-tab="piccSxHtml/systemConfig/repairFoctoryManage/repairFoctoryManageEditForm.html" data-title="编辑用户" data-icon="fa fa-window-maximize">编辑</button>
+        <button class="layui-btn  layui-btn-sm editBtn" lay-event="editBtn">编辑</button>
         <button class="layui-btn layui-btn-danger layui-btn-sm delBtn" lay-event="deleteBtn">删除</button>{{# if(d.accountStatus==1){ }}
         <button class="layui-btn layui-btn-danger layui-btn-sm lockBtn" lay-event="lockBtn">锁定</button> {{# } else { }}
         <button class="layui-btn layui-btn-danger layui-btn-sm onlockBtn" lay-event="onlockBtn">解锁</button> {{# } }}

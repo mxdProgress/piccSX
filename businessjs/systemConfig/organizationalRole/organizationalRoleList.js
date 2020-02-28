@@ -4,16 +4,24 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini'], function() {
         laytpl = layui.laytpl,
         table = layui.table,
         $ = layui.jquery;
-    var nowCurr = 1;
 
-    // checkPagePermissions($);
+    $(".add-btn").on('click', function() {
+        parent.layer.open({
+            type: 2,
+            title: "新增角色",
+            area: ['650px', '90%'],
+            resize: false,
+            move: false,
+            content: 'piccSxHtml/systemConfig/organizationalRole/organizationalRoleListAddForm.html',
+        });
+    });
 
     function tableFun() {
         table.render({
             elem: '#demo',
             url: serverconfig.baseurl + serverconfig.interface.roleOrganRoleList,
             method: "POST",
-            headers: { token: cookie.get("token") },
+            headers: { token: cookie.get("tokenKey") },
             contentType: "application/json; charset=utf-8",
             where: {
                 isPage: "1",
@@ -24,13 +32,12 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini'], function() {
                 limitName: 'pageSize'
             },
             page: true,
-            parseData: function(res) {
-                return {
-                    "code": 0,
-                    "msg": res.info,
-                    "count": res.count,
-                    "data": res.list
-                };
+            response: {
+                statusName: 'status',
+                statusCode: 1,
+                msgName: 'info',
+                countName: 'count',
+                dataName: 'list'
             },
             cols: [
                 [
@@ -41,7 +48,12 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini'], function() {
                     { field: 'organizationMark', title: '备注' },
                     { field: 'right', width: 250, title: '操作', toolbar: '#barDemo' }
                 ]
-            ]
+            ],
+            done: function(res) {
+                if (res.status == 3) {
+                    window.location = '/login.html';
+                }
+            }
         });
     }
     tableFun();
@@ -51,16 +63,27 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini'], function() {
         var event = obj.event;
         var datas = obj.data;
         if (event == "editBtn") {
-            layuimini.getTitleDelTab('编辑角色');
-            var time = new Date().getTime();
-            layui.data('time', {
-                key: 'time',
-                value: time
-            });
-            // 组织角色数据id
-            layui.data('organizationalRoleListEditForm', {
-                key: 'organizationRoleId' + time,
-                value: datas.organizationRoleId
+            // layuimini.getTitleDelTab('编辑角色');
+            // var time = new Date().getTime();
+            // layui.data('time', {
+            //     key: 'time',
+            //     value: time
+            // });
+            // // 组织角色数据id
+            // layui.data('organizationalRoleListEditForm', {
+            //     key: 'organizationRoleId' + time,
+            //     value: datas.organizationRoleId
+            // });
+            var obj = {
+                organizationRoleId: datas.organizationRoleId
+            }
+            parent.layer.open({
+                type: 2,
+                title: "编辑角色",
+                area: ['650px', '90%'],
+                resize: false,
+                move: false,
+                content: 'piccSxHtml/systemConfig/organizationalRole/organizationalRoleListEditForm.html?' + getParam(obj),
             });
         } else if (event == "deleteBtn") {
             parent.layer.open({
@@ -81,17 +104,29 @@ layui.use(['form', 'layer', 'laytpl', 'table', 'layuimini'], function() {
                 }
             });
         } else if (event == "selectuserBtn") {
-            layuimini.getTitleDelTab('分配用户');
-            var time = new Date().getTime();
-            layui.data('time', {
-                key: 'time',
-                value: time
+            // layuimini.getTitleDelTab('分配用户');
+            // var time = new Date().getTime();
+            // layui.data('time', {
+            //     key: 'time',
+            //     value: time
+            // });
+            // // 组织角色数据id
+            // layui.data('organizationalRoleListDistributionForm', {
+            //     key: 'organizationRoleId' + time,
+            //     value: datas.organizationRoleId
+            // });
+            var obj = {
+                organizationRoleId: datas.organizationRoleId
+            }
+            parent.layer.open({
+                type: 2,
+                title: "分配用户",
+                area: ['550px', '80%'],
+                resize: false,
+                move: false,
+                content: 'piccSxHtml/systemConfig/organizationalRole/organizationalRoleListDistributionForm.html?' + getParam(obj),
             });
-            // 组织角色数据id
-            layui.data('organizationalRoleListDistributionForm', {
-                key: 'organizationRoleId' + time,
-                value: datas.organizationRoleId
-            });
+
         }
     });
 

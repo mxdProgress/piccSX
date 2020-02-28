@@ -3069,7 +3069,7 @@ hr {
 
 .layui-table-view .layui-table {
     position: relative;
-    width: auto;
+    /* width: auto; */
     margin: 0
 }
 

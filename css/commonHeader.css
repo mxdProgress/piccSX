@@ -121,3 +121,7 @@ body {
 .layui-body {
     overflow-y: scroll;
 }
+
+.red {
+    color: #FF0000;
+}

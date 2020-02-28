@@ -60,13 +60,40 @@ var serverconfig = {
         "caseQueryCaseList": "caseInfo/queryCaseList",
         "caseAddRepairProcessDetail": "caseInfo/addRepairProcessDetail",
         "caseQuerySendRepairProcess": "caseInfo/querySendRepairProcess",
-        "caseQueryProcessDetail": "appCase/queryProcessDetail",
+        "caseQueryProcessDetail": "caseInfo/queryProcessDetail",
+        "queryCaseRepairList": "caseInfo/queryCaseInfo",
+        "queryCaseRepairDetail": "caseInfo/queryCaseDetail",
+        "updateCaseInfo": "caseInfo/updateCaseInfo",
+        "custWish": "sendRepair/custWish",
+        "recomRepair": "sendRepair/recomRepair",
+        "addLossInfo": "caseInfo/addLossInfo",
+        "deleteLossInfo": "caseInfo/deleteLossInfo",
+        "updateLossInfo": "caseInfo/updateLossInfo",
+        "queryLossInfo": "caseInfo/queryLossInfo",
+        "queryLossDic": "caseInfo/queryLossDic",
+        "queryOrgFactoryInfo": "factory/queryOrgFactoryInfo",
+        "querySendRepairOperLog": "sendRepair/querySendRepairOperLog",
+        "updateCaseRepairCom": "appCase/updateCaseRepairCom",
+
 
         // --问题反馈--
         "queryProblem": "problemFeedBack/queryProblem",
         "updateProblem": "problemFeedBack/updateProblem",
         "deleteProblem": "problemFeedBack/deleteProblem",
 
+        //--报表相关接口--
+        "queryDetailedList": "caseInfo/queryDetailedList",
+        "surveyorSendRepairSta": "sta/surveyorSendRepairSta",
+        "sendRepairOrgSta": "sta/sendRepairOrgSta",
+        "sendRepairZgSta": "sta/sendRepairZgSta",
+        "sendRepairFacSta": "sta/sendRepairFacSta",
+
+        //--人员片区相关接口--
+        "queryUserOrgRelation": "org/queryUserOrgRelation",
+        "addUserOrgRelation": "org/addUserOrgRelation",
+        "deleteRelByUserIds": "org/deleteRelByUserId",
+        "userRelationdeleteByIds": "org/deleteByIds",
+        "findUserList": "user/findUserList"
 
     }
 }

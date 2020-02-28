@@ -35,7 +35,7 @@ var fs = require('fs');
 var cssmin = require('gulp-minify-css');
 
 gulp.paths = {
-    dist: 'dist',
+    dist: 'PICCSX',
 };
 
 
@@ -99,9 +99,9 @@ gulp.task('js-rev', function() {
     return gulp.src('./businessjs/**/*.js')
         .pipe(rev()) //set hash key
         .pipe(uglify())
-        .pipe(gulp.dest('./dist/businessjs'))
+        .pipe(gulp.dest('./PICCSX/businessjs'))
         .pipe(rev.manifest()) //set hash key json
-        .pipe(gulp.dest('./dist/businessjs')); //dest hash key json
+        .pipe(gulp.dest('./PICCSX/businessjs')); //dest hash key json
 });
 /* html rev */
 gulp.task('html-rev', function() {
@@ -118,36 +118,36 @@ gulp.task('html-rev', function() {
     return gulp.src('./piccSxHtml/**/*.html')
         .pipe(rev()) //set hash key
         .pipe(htmlmin(options))
-        .pipe(gulp.dest('./dist/piccSxHtml'))
+        .pipe(gulp.dest('./PICCSX/piccSxHtml'))
         .pipe(rev.manifest()) //set hash key json
-        .pipe(gulp.dest('./dist/piccSxHtml')); //dest hash key json
+        .pipe(gulp.dest('./PICCSX/piccSxHtml')); //dest hash key json
 });
 gulp.task('css-rev', function() {
     return gulp.src(['./css/my.css', './css/style.css'])
         .pipe(rev()) //set hash key
-        .pipe(gulp.dest('./dist/css'))
+        .pipe(gulp.dest('./PICCSX/css'))
         .pipe(rev.manifest()) //set hash key json
-        .pipe(gulp.dest('./dist/css')); //dest hash key json
+        .pipe(gulp.dest('./PICCSX/css')); //dest hash key json
 });
 /**html rev */
 gulp.task('revCollectorJs', function() {
-    return gulp.src(['./dist/businessjs/*.json', './dist/css/*.json', './*.html'])
+    return gulp.src(['./PICCSX/businessjs/*.json', './PICCSX/css/*.json', './*.html'])
         .pipe(revCollector({
             replaceReved: true,
-            'businessjs/': '/dist/businessjs/',
-            'css/': '/dist/css/'
+            'businessjs/': '/PICCSX/businessjs/',
+            'css/': '/PICCSX/css/'
         }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./PICCSX'));
 });
 
 gulp.task('replace-refhtmljs', function() {
-    var data = fs.readFileSync('dist/businessjs/rev-manifest.json', 'utf-8');
+    var data = fs.readFileSync('PICCSX/businessjs/rev-manifest.json', 'utf-8');
     var jsObj = JSON.parse(data);
-    gulp.src(['dist/**/*.html']).pipe(lazyLoadRev(jsObj)).pipe(gulp.dest('dist'));
+    gulp.src(['PICCSX/**/*.html']).pipe(lazyLoadRev(jsObj)).pipe(gulp.dest('PICCSX'));
 })
 gulp.task('replace-refjshtml', function() {
-    var data = fs.readFileSync('dist/piccSxHtml/rev-manifest.json', 'utf-8');
+    var data = fs.readFileSync('PICCSX/piccSxHtml/rev-manifest.json', 'utf-8');
     var htmlObj = JSON.parse(data);
-    gulp.src(['dist/**/*.js']).pipe(lazyLoadRev(htmlObj)).pipe(gulp.dest('dist'));
+    gulp.src(['PICCSX/**/*.js']).pipe(lazyLoadRev(htmlObj)).pipe(gulp.dest('PICCSX'));
 })
 gulp.task('default', ['serve']);
